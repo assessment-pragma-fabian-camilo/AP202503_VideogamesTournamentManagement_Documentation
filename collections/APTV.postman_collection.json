@@ -1,0 +1,1552 @@
+{
+	"info": {
+		"_postman_id": "11941ed7-77eb-4a20-b1d3-fcbb7c44f6e1",
+		"name": "APTV",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "11244321"
+	},
+	"item": [
+		{
+			"name": "orchestrator",
+			"item": [
+				{
+					"name": "Actuator",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"tournament\": {\r\n        \"name\": \"name\",\r\n        \"ruleset\": \"ruleset\",\r\n        \"gameId\": \"2ffd072b-a3c1-4818-abd1-5a7cf0bf7cb1\",\r\n        \"prizePerPosition\": {\r\n            \"1\": 2000.00,\r\n            \"2\": 1000.00\r\n        },\r\n        \"isPaid\": true,\r\n        \"placeLimit\": 100,\r\n        \"placeMinimum\": 20,\r\n        \"dateStart\": \"2025-10-10\",\r\n        \"dateEnd\": \"2025-11-10\",\r\n        \"promoterId\": \"2ffd072b-a3c1-4818-abd1-5a7cf0bf7cb1\",\r\n        \"transmissions\": [\r\n            {\r\n                \"url\": \"url\",\r\n                \"platform\": \"TWITCH\"\r\n            },\r\n            {\r\n                \"url\": \"url\",\r\n                \"platform\": \"DISCORD\"\r\n            }\r\n        ],\r\n        \"commission\": {\r\n            \"viewPercentage\": 5.0,\r\n            \"participationPercentage\": 10,\r\n            \"DonationPercentage\": 20\r\n        },\r\n        \"price\": {\r\n            \"participation\": 2000.00,\r\n            \"view\": 2000.00\r\n        }\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8081/actuator",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"actuator"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "airtable",
+			"item": [
+				{
+					"name": "user",
+					"item": [
+						{
+							"name": "user",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{airtable-bearer-user}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{airtable-base-url}}{{airtable-base-path-user}}",
+									"host": [
+										"{{airtable-base-url}}{{airtable-base-path-user}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "user",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{airtable-bearer-user}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"records\": [\r\n        {\r\n            \"id\": \"recoyubCuSes3tgai\",\r\n            \"fields\": {\r\n                \"alias\": \"Andrés\",\r\n                \"name\": \"Andrés Felipe Barrios\",\r\n                \"email\": \"f@email.com\",\r\n                \"password\": \"123\"\r\n            }\r\n        }\r\n    ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{airtable-base-url}}{{airtable-base-path-user}}",
+									"host": [
+										"{{airtable-base-url}}{{airtable-base-path-user}}"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "tournament",
+					"item": [
+						{
+							"name": "tournament",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{airtable-bearer-tournament}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{airtable-base-url}}{{airtable-base-path-tournament}}",
+									"host": [
+										"{{airtable-base-url}}{{airtable-base-path-tournament}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "tournament",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{airtable-bearer-tournament}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"records\": [\r\n        {\r\n            \"id\": \"rec2XUJpXmHZyA9wQ\",\r\n            \"fields\": {\r\n                \"placeRemaining\": 99,\r\n                \"preRegisteredParticipantIds\": [\r\n                    \"recxutuBMotiywBAX\"\r\n                ]\r\n            }\r\n        }\r\n    ],\r\n    \"typecast\": true\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://api.airtable.com/v0/appXlvcXIBm9UbC4k/Tournament",
+									"protocol": "https",
+									"host": [
+										"api",
+										"airtable",
+										"com"
+									],
+									"path": [
+										"v0",
+										"appXlvcXIBm9UbC4k",
+										"Tournament"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "game",
+					"item": [
+						{
+							"name": "game",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{airtable-bearer-game}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{airtable-base-url}}{{airtable-base-path-game}}",
+									"host": [
+										"{{airtable-base-url}}{{airtable-base-path-game}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "game",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{airtable-bearer-user}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"records\": [\r\n        {\r\n            \"id\": \"recoyubCuSes3tgai\",\r\n            \"fields\": {\r\n                \"alias\": \"Andrés\",\r\n                \"name\": \"Andrés Felipe Barrios\",\r\n                \"email\": \"f@email.com\",\r\n                \"password\": \"123\"\r\n            }\r\n        }\r\n    ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{airtable-base-url}}{{airtable-base-path-game}}",
+									"host": [
+										"{{airtable-base-url}}{{airtable-base-path-game}}"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "registration",
+					"item": [
+						{
+							"name": "registration",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{airtable-bearer-registration}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{airtable-base-url}}{{airtable-base-path-registration}}",
+									"host": [
+										"{{airtable-base-url}}{{airtable-base-path-registration}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "registration",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{airtable-bearer-registration}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"records\": [\r\n        {\r\n            \"fields\": {\r\n                \"tournamentId\": \"rec2XUJpXmHZyA9wQ\",\r\n                \"participantId\": \"recxutuBMotiywBAX\",\r\n                \"status\": \"PENDING\"\r\n            }\r\n        }\r\n    ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{airtable-base-url}}{{airtable-base-path-registration}}",
+									"host": [
+										"{{airtable-base-url}}{{airtable-base-path-registration}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "registration",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{airtable-bearer-registration}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"records\": [\r\n        {\r\n            \"fields\": {\r\n                \"tournamentId\": \"rec2XUJpXmHZyA9wQ\",\r\n                \"participantId\": \"recxutuBMotiywBAX\",\r\n                \"status\": \"PENDING\"\r\n            }\r\n        }\r\n    ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{airtable-base-url}}{{airtable-base-path-registration}}",
+									"host": [
+										"{{airtable-base-url}}{{airtable-base-path-registration}}"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "transaction",
+					"item": [
+						{
+							"name": "transaction",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{airtable-bearer-transaction}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{airtable-base-url}}{{airtable-base-path-transaction}}",
+									"host": [
+										"{{airtable-base-url}}{{airtable-base-path-transaction}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "transaction",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{airtable-bearer-transaction}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"records\": [\r\n        {\r\n            \"fields\": {\r\n                \"tournamentId\": \"rec2XUJpXmHZyA9wQ\",\r\n                \"participantId\": \"recxutuBMotiywBAX\",\r\n                \"status\": \"PENDING\"\r\n            }\r\n        }\r\n    ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{airtable-base-url}}{{airtable-base-path-transaction}}",
+									"host": [
+										"{{airtable-base-url}}{{airtable-base-path-transaction}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "transaction",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{airtable-bearer-transaction}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"records\": [\r\n        {\r\n            \"fields\": {\r\n                \"reference\": null,\r\n                \"customerId\": \"recxutuBMotiywBAX\",\r\n                \"tournamentId\": null,\r\n                \"status\": \"STARTED\",\r\n                \"paymentMethod\": \"NONE\",\r\n                \"type\": \"PARTICIPATION\"\r\n            }\r\n        }\r\n    ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{airtable-base-url}}{{airtable-base-path-transaction}}",
+									"host": [
+										"{{airtable-base-url}}{{airtable-base-path-transaction}}"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "ticket",
+					"item": [
+						{
+							"name": "ticket",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{airtable-bearer-ticket}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{airtable-base-url}}{{airtable-base-path-ticket}}",
+									"host": [
+										"{{airtable-base-url}}{{airtable-base-path-ticket}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "ticket",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{airtable-bearer-ticket}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"records\": [\r\n        {\r\n            \"fields\": {\r\n                \"tournamentId\": \"rec2XUJpXmHZyA9wQ\",\r\n                \"participantId\": \"recxutuBMotiywBAX\",\r\n                \"status\": \"PENDING\"\r\n            }\r\n        }\r\n    ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{airtable-base-url}}{{airtable-base-path-ticket}}",
+									"host": [
+										"{{airtable-base-url}}{{airtable-base-path-ticket}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "ticket",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{airtable-bearer-ticket}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"records\": [\r\n        {\r\n            \"fields\": {\r\n                \"customerId\": \"recxutuBMotiywBAX\",\r\n                \"tournamentId\": \"rec2XUJpXmHZyA9wQ\",\r\n                \"transactionId\": \"reckXKXjnaeAu4EAJ\",\r\n                \"type\": \"PARTICIPATION\",\r\n                \"status\": \"NEW\"\r\n            }\r\n        }\r\n    ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{airtable-base-url}}{{airtable-base-path-ticket}}",
+									"host": [
+										"{{airtable-base-url}}{{airtable-base-path-ticket}}"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "API gateway",
+			"item": [
+				{
+					"name": "User",
+					"item": [
+						{
+							"name": "GET all users",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{airtable-bearer-user}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/v0/appk0YX2C57OOasvk/User",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"v0",
+										"appk0YX2C57OOasvk",
+										"User"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GET user",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{airtable-bearer-user}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/v0/appk0YX2C57OOasvk/User/recoyubCuSes3tgai",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"v0",
+										"appk0YX2C57OOasvk",
+										"User",
+										"recoyubCuSes3tgai"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Donation",
+					"item": [
+						{
+							"name": "GET all donations",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{airtable-bearer-donation}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/v0/appzcxshQc0Vy8LJB/Donation",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"v0",
+										"appzcxshQc0Vy8LJB",
+										"Donation"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GET donation",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{airtable-bearer-donation}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/v0/appzcxshQc0Vy8LJB/Donation/recoyubCuSes3tgai",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"v0",
+										"appzcxshQc0Vy8LJB",
+										"Donation",
+										"recoyubCuSes3tgai"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Ticket",
+					"item": [
+						{
+							"name": "GET all tickets",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{airtable-bearer-ticket}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/v0/appZYoxtJOwerMTap/Ticket",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"v0",
+										"appZYoxtJOwerMTap",
+										"Ticket"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GET ticket",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{airtable-bearer-ticket}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/v0/appZYoxtJOwerMTap/Ticket/rec55Lkbsusz1ha11",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"v0",
+										"appZYoxtJOwerMTap",
+										"Ticket",
+										"rec55Lkbsusz1ha11"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "register Ticket",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8080/api/v1/tournaments/rec2XUJpXmHZyA9wQ/users/recxutuBMotiywBAX/tickets?reference=cmVjeHV0dUJNb3RpeXdCQVh8cmVjMlhVSnBYbUhaeUE5d1F8MjAyNS0wMy0zMFQxNDoxNjo1My41NDEwMDM0MDA=",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"tournaments",
+										"rec2XUJpXmHZyA9wQ",
+										"users",
+										"recxutuBMotiywBAX",
+										"tickets"
+									],
+									"query": [
+										{
+											"key": "reference",
+											"value": "cmVjeHV0dUJNb3RpeXdCQVh8cmVjMlhVSnBYbUhaeUE5d1F8MjAyNS0wMy0zMFQxNDoxNjo1My41NDEwMDM0MDA="
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Tournament",
+					"item": [
+						{
+							"name": "GET all tournaments",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{airtable-bearer-tournament}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/v0/appXlvcXIBm9UbC4k/Tournament",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"v0",
+										"appXlvcXIBm9UbC4k",
+										"Tournament"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GET tournament",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{airtable-bearer-tournament}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/v0/appXlvcXIBm9UbC4k/Tournament/rec20Yo54FrEW0ptj",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"v0",
+										"appXlvcXIBm9UbC4k",
+										"Tournament",
+										"rec20Yo54FrEW0ptj"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "register tournament",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"tournament\": {\r\n        \"name\": \"Torneo de novatos Dota 2\",\r\n        \"ruleset\": \"Sólo puede jugar las medallas de Leyenda e inferiores\",\r\n        \"gameId\": \"recEcR6lPOTr0dc2m\",\r\n        \"prizePerPosition\": {\r\n            \"1\": 2000.00,\r\n            \"2\": 1000.00\r\n        },\r\n        \"isPaid\": false,\r\n        \"placeLimit\": 100,\r\n        \"placeMinimum\": 20,\r\n        \"dateStart\": \"2025-10-10\",\r\n        \"dateEnd\": \"2025-11-10\",\r\n        \"transmissions\": [\r\n            {\r\n                \"url\": \"https://twitch.tv\",\r\n                \"platform\": \"TWITCH\"\r\n            },\r\n            {\r\n                \"url\": \"https://youtube.com\",\r\n                \"platform\": \"YOUTUBE\"\r\n            }\r\n        ],\r\n        \"commission\": {\r\n            \"visualizationPercentage\": 5.0,\r\n            \"participationPercentage\": 10,\r\n            \"DonationPercentage\": 20\r\n        },\r\n        \"price\": {\r\n            \"participation\": 2000.00,\r\n            \"vizualization\": 2000.00\r\n        }\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8080/api/v1/tournaments",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"tournaments"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "start tournament",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"tournament\": {\r\n        \"name\": \"Torneo de novatos Dota 2\",\r\n        \"ruleset\": \"Sólo puede jugar las medallas de Leyenda e inferiores\",\r\n        \"gameId\": \"recEcR6lPOTr0dc2m\",\r\n        \"prizePerPosition\": {\r\n            \"1\": 2000.00,\r\n            \"2\": 1000.00\r\n        },\r\n        \"isPaid\": false,\r\n        \"placeLimit\": 100,\r\n        \"placeMinimum\": 20,\r\n        \"dateStart\": \"2025-10-10\",\r\n        \"dateEnd\": \"2025-11-10\",\r\n        \"transmissions\": [\r\n            {\r\n                \"url\": \"https://twitch.tv\",\r\n                \"platform\": \"TWITCH\"\r\n            },\r\n            {\r\n                \"url\": \"https://youtube.com\",\r\n                \"platform\": \"YOUTUBE\"\r\n            }\r\n        ],\r\n        \"commission\": {\r\n            \"visualizationPercentage\": 5.0,\r\n            \"participationPercentage\": 10,\r\n            \"DonationPercentage\": 20\r\n        },\r\n        \"price\": {\r\n            \"participation\": 2000.00,\r\n            \"vizualization\": 2000.00\r\n        }\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8080/api/v1/tournaments/rec2XUJpXmHZyA9wQ/start",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"tournaments",
+										"rec2XUJpXmHZyA9wQ",
+										"start"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "pre-register Participant",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"tournament\": {\r\n        \"name\": \"Torneo de novatos Dota 2\",\r\n        \"ruleset\": \"Sólo puede jugar las medallas de Leyenda e inferiores\",\r\n        \"gameId\": \"recEcR6lPOTr0dc2m\",\r\n        \"prizePerPosition\": {\r\n            \"1\": 2000.00,\r\n            \"2\": 1000.00\r\n        },\r\n        \"isPaid\": false,\r\n        \"placeLimit\": 100,\r\n        \"placeMinimum\": 20,\r\n        \"dateStart\": \"2025-10-10\",\r\n        \"dateEnd\": \"2025-11-10\",\r\n        \"transmissions\": [\r\n            {\r\n                \"url\": \"https://twitch.tv\",\r\n                \"platform\": \"TWITCH\"\r\n            },\r\n            {\r\n                \"url\": \"https://youtube.com\",\r\n                \"platform\": \"YOUTUBE\"\r\n            }\r\n        ],\r\n        \"commission\": {\r\n            \"visualizationPercentage\": 5.0,\r\n            \"participationPercentage\": 10,\r\n            \"DonationPercentage\": 20\r\n        },\r\n        \"price\": {\r\n            \"participation\": 2000.00,\r\n            \"vizualization\": 2000.00\r\n        }\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8080/api/v1/tournaments/rec2XUJpXmHZyA9wQ/users/recxutuBMotiywBAX/pre-register",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"tournaments",
+										"rec2XUJpXmHZyA9wQ",
+										"users",
+										"recxutuBMotiywBAX",
+										"pre-register"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "register Participant",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"tournament\": {\r\n        \"name\": \"Torneo de novatos Dota 2\",\r\n        \"ruleset\": \"Sólo puede jugar las medallas de Leyenda e inferiores\",\r\n        \"gameId\": \"recEcR6lPOTr0dc2m\",\r\n        \"prizePerPosition\": {\r\n            \"1\": 2000.00,\r\n            \"2\": 1000.00\r\n        },\r\n        \"isPaid\": false,\r\n        \"placeLimit\": 100,\r\n        \"placeMinimum\": 20,\r\n        \"dateStart\": \"2025-10-10\",\r\n        \"dateEnd\": \"2025-11-10\",\r\n        \"transmissions\": [\r\n            {\r\n                \"url\": \"https://twitch.tv\",\r\n                \"platform\": \"TWITCH\"\r\n            },\r\n            {\r\n                \"url\": \"https://youtube.com\",\r\n                \"platform\": \"YOUTUBE\"\r\n            }\r\n        ],\r\n        \"commission\": {\r\n            \"visualizationPercentage\": 5.0,\r\n            \"participationPercentage\": 10,\r\n            \"DonationPercentage\": 20\r\n        },\r\n        \"price\": {\r\n            \"participation\": 2000.00,\r\n            \"vizualization\": 2000.00\r\n        }\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8080/api/v1/tournaments/rec2XUJpXmHZyA9wQ/users/recxutuBMotiywBAX/tickets/rec55Lkbsusz1ha11/register",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"tournaments",
+										"rec2XUJpXmHZyA9wQ",
+										"users",
+										"recxutuBMotiywBAX",
+										"tickets",
+										"rec55Lkbsusz1ha11",
+										"register"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "finalzie tournament",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"reward\": {\r\n        \"standings\": {\r\n            \"1\": \"recxutuBMotiywBAX\"\r\n        }\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8080/api/v1/tournaments/rec2XUJpXmHZyA9wQ/finalize",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"tournaments",
+										"rec2XUJpXmHZyA9wQ",
+										"finalize"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "add mod to Tournament",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8080/api/v1/tournaments/rec2XUJpXmHZyA9wQ/moderators",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"tournaments",
+										"rec2XUJpXmHZyA9wQ",
+										"moderators"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Transaction",
+					"item": [
+						{
+							"name": "GET all transactions",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{airtable-bearer-transaction}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/v0/appVjMdyn0xz33IrN/Transaction",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"v0",
+										"appVjMdyn0xz33IrN",
+										"Transaction"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GET transaction",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{airtable-bearer-transaction}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/v0/appVjMdyn0xz33IrN/Transaction/reckXKXjnaeAu4EAJ",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"v0",
+										"appVjMdyn0xz33IrN",
+										"Transaction",
+										"reckXKXjnaeAu4EAJ"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Game",
+					"item": [
+						{
+							"name": "GET all games",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{airtable-bearer-game}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/v0/applweqzz7i8UwiBl/Game",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"v0",
+										"applweqzz7i8UwiBl",
+										"Game"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GET game",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{airtable-bearer-game}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/v0/applweqzz7i8UwiBl/Game/recEcR6lPOTr0dc2m",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"v0",
+										"applweqzz7i8UwiBl",
+										"Game",
+										"recEcR6lPOTr0dc2m"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Match",
+					"item": [
+						{
+							"name": "GET all matches",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{airtable-bearer-match}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/v0/appek16Y1B9AV5b6y/Match",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"v0",
+										"appek16Y1B9AV5b6y",
+										"Match"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GET match",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{airtable-bearer-match}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/v0/appek16Y1B9AV5b6y/Match/recMAfxK3qCIh240g",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"v0",
+										"appek16Y1B9AV5b6y",
+										"Match",
+										"recMAfxK3qCIh240g"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "register match",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"match\": {\r\n        \"participantIds\": [\r\n            \"recxutuBMotiywBAX\"\r\n        ],\r\n        \"dateStart\": \"2025-03-30\"\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8080/api/v1/tournaments/rec2XUJpXmHZyA9wQ/matches",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"tournaments",
+										"rec2XUJpXmHZyA9wQ",
+										"matches"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Registration",
+					"item": [
+						{
+							"name": "GET all registrations",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{airtable-bearer-registration}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/v0/appqWYF61288IoPBm/Registration",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"v0",
+										"appqWYF61288IoPBm",
+										"Registration"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GET registration",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{airtable-bearer-registration}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/v0/appqWYF61288IoPBm/Registration/recuzUkr4M6smC9uO",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"v0",
+										"appqWYF61288IoPBm",
+										"Registration",
+										"recuzUkr4M6smC9uO"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Reward",
+					"item": [
+						{
+							"name": "GET all rewards",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{airtable-bearer-reward}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/v0/app1z218UhU3CKu7a/Reward",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"v0",
+										"app1z218UhU3CKu7a",
+										"Reward"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GET reward",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{airtable-bearer-reward}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/v0/app1z218UhU3CKu7a/Reward/recuzUkr4M6smC9uO",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"v0",
+										"app1z218UhU3CKu7a",
+										"Reward",
+										"recuzUkr4M6smC9uO"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "airtable-bearer-user",
+			"value": "patw7GO7YkLbI21yh.618fc81f6a454afbe256e247332f1af5039e62eaf5b63e53d82172828f1b47b0",
+			"type": "string"
+		},
+		{
+			"key": "airtable-bearer-transaction",
+			"value": "patjki3w5IS9mQfno.24357b2ed347490dd572d5c431c574a5db7906102407c61b2a8bc07662d43d71",
+			"type": "string"
+		},
+		{
+			"key": "airtable-bearer-tournament",
+			"value": "pataJjbsbFCJSp2Xl.301d8be1edb8c962d483c29d781f9591b84df29f7cfe28d58f2896a8f42cd48a",
+			"type": "string"
+		},
+		{
+			"key": "airtable-bearer-ticket",
+			"value": "patmfXqZbmE4N4nk9.8ee6e97c55a3646c81efc48450e4e8ca60e936d07425847b61cc36b45263aa4a",
+			"type": "string"
+		},
+		{
+			"key": "airtable-bearer-reward",
+			"value": "patBBKzJx21Q3Zq8Y.11232ac46d95f5dad3433b42bf73d337646654ebdcfbfbac639a03c94db61e2f",
+			"type": "string"
+		},
+		{
+			"key": "airtable-bearer-registration",
+			"value": "patpxCIyntMG4kcvr.fa93e0b27b7e07b5cc266fd3a703aac27c3c98630d45c5d5ffed3b78d8041825",
+			"type": "string"
+		},
+		{
+			"key": "airtable-bearer-match",
+			"value": "patvNvdLEu7DHvCgN.9356d96202ced5d3754b84ce0d7ac4764902ad3d24e5fbe6b69f30c53c16d077",
+			"type": "string"
+		},
+		{
+			"key": "airtable-bearer-game",
+			"value": "patwUDou1smt50PMS.1302793e4b13578e5826c9be0e29c84b1255c34af395528fc55810ea2b07785d",
+			"type": "string"
+		},
+		{
+			"key": "airtable-bearer-donation",
+			"value": "pathUjcWQaqrA7rCR.5ed1cf065370127f50e180dbfa3058e0c7fcd7c11addeee0a4ac3e4ec2be16a5",
+			"type": "string"
+		},
+		{
+			"key": "airtable-base-path-user",
+			"value": "/appk0YX2C57OOasvk/User",
+			"type": "string"
+		},
+		{
+			"key": "airtable-base-path-transaction",
+			"value": "/appVjMdyn0xz33IrN/Transaction",
+			"type": "string"
+		},
+		{
+			"key": "airtable-base-path-tournament",
+			"value": "/appXlvcXIBm9UbC4k/Tournament",
+			"type": "string"
+		},
+		{
+			"key": "airtable-base-path-ticket",
+			"value": "/appZYoxtJOwerMTap/Ticket",
+			"type": "string"
+		},
+		{
+			"key": "airtable-base-path-reward",
+			"value": "/app1z218UhU3CKu7a/Reward",
+			"type": "string"
+		},
+		{
+			"key": "airtable-base-path-registration",
+			"value": "/appqWYF61288IoPBm/Registration",
+			"type": "string"
+		},
+		{
+			"key": "airtable-base-path-match",
+			"value": "/appek16Y1B9AV5b6y/Match",
+			"type": "string"
+		},
+		{
+			"key": "airtable-base-path-game",
+			"value": "/applweqzz7i8UwiBl/Game",
+			"type": "string"
+		},
+		{
+			"key": "airtable-base-path-donation",
+			"value": "/appzcxshQc0Vy8LJB/Donation",
+			"type": "string"
+		},
+		{
+			"key": "airtable-base-url",
+			"value": "https://api.airtable.com/v0",
+			"type": "string"
+		}
+	]
+}
