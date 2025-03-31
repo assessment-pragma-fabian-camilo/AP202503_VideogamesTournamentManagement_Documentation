@@ -925,6 +925,7 @@
 
   <section id="endpoints">
     <h2>Endpoints</h2>
+    <p><span><a href="collections/APTV.postman_collection.json" download="Postman Collection APTV">Descargar - Colección Postman con todas las peticiones</a></span></p>
     <p>Listado y descripción de los endpoints de la API. Para la variable <span>{host}</span> se deberá usar el host del
       API Gateway y no de los servicios aislados</p>
 
@@ -990,8 +991,10 @@
         Gateway</strong>.
     </p>
     <p>La configuración de rutas se puede hacer de manera simple, usando Java, y con infinidad de condiciones de
-      enrutado, tal como se muestra a continuación.
+      enrutado, tal como se muestra a continuación. Además, se pueden utilizar mecanismos de tolerancia a fallos tales como
+      <span>CircuitBreaker</span>, <span>Retry</span>, <span>FallBack</span>, <span>RateLimit</span>, <span>Bulkhead</span>, entre otros.
     </p>
+    <p>En este caso hice la implementación de <span>CircuitBreaker</span>, <span>Retry</span> y <span>FallBack</span></p>
     <div class="image-container">
       <img src="img/config de routes en API Gateway.jpg" alt="configuración de rutas en API Gateway">
     </div>
