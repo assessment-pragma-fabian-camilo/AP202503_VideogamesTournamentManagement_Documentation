@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Gestión de Torneos de Videojuegos - Documentación</title>
   <link rel="stylesheet" href="styles.css">
+  <script src="script.js"></script>
 </head>
 
 <body>
@@ -13,82 +14,1025 @@
     <h1>Documentación - Gestión de Torneos de Videojuegos</h1>
     <nav>
       <ul>
+        <li><a href="#introduccion">Introducción</a></li>
         <li><a href="#definicion-funcional">Definición Funcional</a></li>
-        <li><a href="#entidades">Entidades</a></li>
-        <li><a href="#casos-uso">Casos de Uso</a></li>
         <li><a href="#diagramas">Diagramas</a></li>
         <li><a href="#endpoints">Endpoints</a></li>
         <li><a href="#tecnologias">Tecnologías Utilizadas</a></li>
         <li><a href="#instalacion">Instalación</a></li>
+        <li><a href="#gestion-proyecto">Gestión del proyecto</a></li>
       </ul>
     </nav>
   </header>
 
+  <section id="introduccion">
+    <h2>Introducción</h2>
+    <p>A continuación se describirá de forma completa toda la solución en fase inicial (primera itereración) para el
+      problema propuesto como Assessment en Pragma. El problema en cuestión es el <strong>Sistema de Gestión de
+        Torneosde Videojuegos</strong>. Todo esto desde la concepción inicial, gestión del proyecto, repositorios,
+      tecnologías, etc.</p>
+  </section>
+
   <section id="definicion-funcional">
     <h2>Definición Funcional</h2>
-    <p>Descripción general del sistema y sus funcionalidades principales.</p>
-    <div class="image-container">
-      <img src="fc.jpg" alt="Descripción del diagrama">
-    </div>
-  </section>
-
-  <section id="entidades">
-    <h2>Entidades</h2>
-    <p>Descripción de las entidades del sistema siguiendo principios de DDD.</p>
-  </section>
-
-  <section id="casos-uso">
-    <h2>Casos de Uso</h2>
-
+    <p>En esta sección se explica toda la definición funcional, incluyendo las entidades del dominio y los casos de uso,
+      tanto los que están actualmente implementados como los que no.</p>
     <div class="sub-seccion">
-      <h3>Crear Torneo</h3>
-      <p>Permite a los organizadores configurar torneos con reglas específicas.</p>
+      <h3>Entidades</h3>
+      <p>Luego de culminar el análisis funcional de todo el documento, y tomando como referencia las entidades que se
+        presentaron el en mismo, se llegó al desarrollo de las siguientes entidades de dominio</p>
+      <div class="table-container">
+        <h2>Listado de entidades de dominio</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Entidades</th>
+              <th>Atributos</th>
+              <th>Tipo de dato</th>
+              <th>Descripción</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td rowspan="6" colspan="1">
+                <h4>Donation</h4>
+              </td>
+              <td>id</td>
+              <td>String</td>
+              <td>Id único de la entidad</td>
+            </tr>
+            <tr>
+              <td>createdTime</td>
+              <td>String</td>
+              <td>Fecha y hora de creación</td>
+            </tr>
+            <tr>
+              <td>userId</td>
+              <td>String</td>
+              <td>Id de referencia del usuario que realiza la donación</td>
+            </tr>
+            <tr>
+              <td>tournamentId</td>
+              <td>String</td>
+              <td>Id de referencia del torneo en el que realizan la donación</td>
+            </tr>
+            <tr>
+              <td>amount</td>
+              <td>BigDecimal</td>
+              <td>Cantidad de dinero que fue donada</td>
+            </tr>
+            <tr>
+              <td>transactionId</td>
+              <td>String</td>
+              <td>Identificador de la transacción</td>
+            </tr>
+            <tr>
+              <td rowspan="8" colspan="1">
+                <h4>Game</h4>
+              </td>
+              <td>id</td>
+              <td>String</td>
+              <td>Id único de la entidad</td>
+            </tr>
+            <tr>
+              <td>createdTime</td>
+              <td>String</td>
+              <td>Fecha y hora de creación</td>
+            </tr>
+            <tr>
+              <td>name</td>
+              <td>String</td>
+              <td>Nomrbe del juego</td>
+            </tr>
+            <tr>
+              <td>description</td>
+              <td>String</td>
+              <td>Descripción detallada del juego</td>
+            </tr>
+            <tr>
+              <td>categories</td>
+              <td>Set(String)</td>
+              <td>Un conjunto de categorías que representa al juego</td>
+            </tr>
+            <tr>
+              <td>consoles</td>
+              <td>Set(Console)</td>
+              <td>Un conjunto de consolas en las que el jeugo está disponible</td>
+            </tr>
+            <tr>
+              <td>releaseDate</td>
+              <td>String</td>
+              <td>Fecha de lanzamiento del juego</td>
+            </tr>
+            <tr>
+              <td>classification</td>
+              <td>Classification</td>
+              <td>Clasigicación PEGI del juego</td>
+            </tr>
+            <tr>
+              <td rowspan="9" colspan="1">
+                <h4>Match</h4>
+              </td>
+              <td>id</td>
+              <td>String</td>
+              <td>Id único de la entidad</td>
+            </tr>
+            <tr>
+              <td>createdTime</td>
+              <td>String</td>
+              <td>Fecha y hora de creación</td>
+            </tr>
+            <tr>
+              <td>participantIds</td>
+              <td>Set(String)</td>
+              <td>Conjunto de participantes que están registrados en una partida</td>
+            </tr>
+            <tr>
+              <td>winnerId</td>
+              <td>String</td>
+              <td>Id del participante que ganó la partida</td>
+            </tr>
+            <tr>
+              <td>tournamentId</td>
+              <td>String</td>
+              <td>Id del torneo en el que está registrada la partida</td>
+            </tr>
+            <tr>
+              <td>timeStart</td>
+              <td>String</td>
+              <td>Fecha y hora en la que inició la partida</td>
+            </tr>
+            <tr>
+              <td>dateStart</td>
+              <td>String</td>
+              <td>Fecha en la que se tiene programado que inicie la partida</td>
+            </tr>
+            <tr>
+              <td>timeEnd</td>
+              <td>String</td>
+              <td>Fecha y hora en la que terminó la partida</td>
+            </tr>
+            <tr>
+              <td>status</td>
+              <td>Status</td>
+              <td>Estado actual de la partida</td>
+            </tr>
+            <tr>
+              <td rowspan="5" colspan="1">
+                <h4>Registration</h4>
+              </td>
+              <td>id</td>
+              <td>String</td>
+              <td>Id único de la entidad</td>
+            </tr>
+            <tr>
+              <td>createdTime</td>
+              <td>String</td>
+              <td>Fecha y hora de creación</td>
+            </tr>
+            <tr>
+              <td>tournamentId</td>
+              <td>String</td>
+              <td>Id del torneo en el que un participante está haciendo el registro</td>
+            </tr>
+            <tr>
+              <td>participantId</td>
+              <td>String</td>
+              <td>Id del participante que está tratando de hacer el registro</td>
+            </tr>
+            <tr>
+              <td>status</td>
+              <td>Status</td>
+              <td>Estado actual del registro</td>
+            </tr>
+            <tr>
+              <td rowspan="5" colspan="1">
+                <h4>Reward</h4>
+              </td>
+              <td>id</td>
+              <td>String</td>
+              <td>Id único de la entidad</td>
+            </tr>
+            <tr>
+              <td>createdTime</td>
+              <td>String</td>
+              <td>Fecha y hora de creación</td>
+            </tr>
+            <tr>
+              <td>standings</td>
+              <td>Map(Byte, String)</td>
+              <td>Contiene la relación entre la posición en el podio con los Ids de los participantes que están en él
+              </td>
+            </tr>
+            <tr>
+              <td>prizePerStanding</td>
+              <td>Map(String, BigDecimal)</td>
+              <td>Contiene la relación entre los Ids de los ganadores y el incentivo económico que ganaron</td>
+            </tr>
+            <tr>
+              <td>tournamentId</td>
+              <td>String</td>
+              <td>Identificador del torneo que ya terminó, sobre el cual se generó el premio</td>
+            </tr>
+            <tr>
+              <td rowspan="8" colspan="1">
+                <h4>Ticket</h4>
+              </td>
+              <td>id</td>
+              <td>String</td>
+              <td>Id único de la entidad</td>
+            </tr>
+            <tr>
+              <td>createdTime</td>
+              <td>String</td>
+              <td>Fecha y hora de creación</td>
+            </tr>
+            <tr>
+              <td>customerId</td>
+              <td>String</td>
+              <td>Id del cliente que compra un ticket</td>
+            </tr>
+            <tr>
+              <td>tournamentId</td>
+              <td>String</td>
+              <td>Id del torneo para el cual se compra el ticket</td>
+            </tr>
+            <tr>
+              <td>transactionId</td>
+              <td>String</td>
+              <td>Id de la transacción a la que está ligada el ticket</td>
+            </tr>
+            <tr>
+              <td>type</td>
+              <td>Type</td>
+              <td>Tipo de ticket</td>
+            </tr>
+            <tr>
+              <td>status</td>
+              <td>Status</td>
+              <td>Estado actual del ticket</td>
+            </tr>
+            <tr>
+              <td>qr</td>
+              <td>String</td>
+              <td>Código QR generado al crear el ticket</td>
+            </tr>
+            <tr>
+              <td rowspan="22" colspan="1">
+                <h4>Tournament</h4>
+              </td>
+              <td>id</td>
+              <td>String</td>
+              <td>Id único de la entidad</td>
+            </tr>
+            <tr>
+              <td>createdTime</td>
+              <td>String</td>
+              <td>Fecha y hora de creación</td>
+            </tr>
+            <tr>
+              <td>name</td>
+              <td>String</td>
+              <td>Nombre del torneo</td>
+            </tr>
+            <tr>
+              <td>ruleset</td>
+              <td>String</td>
+              <td>Conjunto de reglas bien definidas del torneo</td>
+            </tr>
+            <tr>
+              <td>promoterId</td>
+              <td>String</td>
+              <td>Id del promotor del torneo</td>
+            </tr>
+            <tr>
+              <td>gameId</td>
+              <td>String</td>
+              <td>Id del juego que se jugará en el torneo</td>
+            </tr>
+            <tr>
+              <td>prizePerPosition</td>
+              <td>Map(Byte, BigDecimal)</td>
+              <td>Un mapa que relaciona cada posición en el podio con el premio monetario</td>
+            </tr>
+            <tr>
+              <td>isPaid</td>
+              <td>Boolean</td>
+              <td>Define si el torneo es de pago o es gratis</td>
+            </tr>
+            <tr>
+              <td>status</td>
+              <td>Status</td>
+              <td>Estado actual del torneo</td>
+            </tr>
+            <tr>
+              <td>placeLimit</td>
+              <td>Short</td>
+              <td>Cantidad máxima de plazas para participantes</td>
+            </tr>
+            <tr>
+              <td>placeRemaining</td>
+              <td>Short</td>
+              <td>Cantidad actual de plazas libres (antes de iniciar el torneo)</td>
+            </tr>
+            <tr>
+              <td>placeMinimum</td>
+              <td>Short</td>
+              <td>Cantidad mínima de plazas antes de poder dar inicio al torneo</td>
+            </tr>
+            <tr>
+              <td>dateStart</td>
+              <td>String</td>
+              <td>Fecha prevista para iniciar el torneo</td>
+            </tr>
+            <tr>
+              <td>dateEnd</td>
+              <td>String</td>
+              <td>Fecha prevista para la finalización del torneo</td>
+            </tr>
+            <tr>
+              <td>transmissions</td>
+              <td>List(Transmission)</td>
+              <td>Listado de transmisiones, con plataforma u su respectiva URL</td>
+            </tr>
+            <tr>
+              <td>commission</td>
+              <td>Commission</td>
+              <td>Conjunto de comisiones para visualización, participación y donación</td>
+            </tr>
+            <tr>
+              <td>preRegisteredParticipantIds</td>
+              <td>Set(String)</td>
+              <td>Conjunto de Ids de usuarios pre-registrados</td>
+            </tr>
+            <tr>
+              <td>participantIds</td>
+              <td>Set(String)</td>
+              <td>Conjunto de Ids de usuarios registrados y listos para participar</td>
+            </tr>
+            <tr>
+              <td>disqualifiedParticipantIds</td>
+              <td>Set(String)</td>
+              <td>Conjunto de participantes descalificados del torneo</td>
+            </tr>
+            <tr>
+              <td>moderatorIds</td>
+              <td>Set(String)</td>
+              <td>Conjunto de moderadores del torneo</td>
+            </tr>
+            <tr>
+              <td>price</td>
+              <td>Price</td>
+              <td>Precios para vizualización y participación</td>
+            </tr>
+            <tr>
+              <td>closedTournamentJustification</td>
+              <td>String</td>
+              <td>Justificación válida del cierre o cancelación de un torneo</td>
+            </tr>
+            <tr>
+              <td rowspan="8" colspan="1">
+                <h4>Transaction</h4>
+              </td>
+              <td>id</td>
+              <td>String</td>
+              <td>Id único de la entidad</td>
+            </tr>
+            <tr>
+              <td>createdTime</td>
+              <td>String</td>
+              <td>Fecha y hora de creación</td>
+            </tr>
+            <tr>
+              <td>customerId</td>
+              <td>String</td>
+              <td>Id del cliente registrado en la transacción de compra</td>
+            </tr>
+            <tr>
+              <td>tournamentId</td>
+              <td>String</td>
+              <td>Id del torneo para el cual se generó la transacción de compra</td>
+            </tr>
+            <tr>
+              <td>status</td>
+              <td>Status</td>
+              <td>Estado actual de la transacción</td>
+            </tr>
+            <tr>
+              <td>paymentMethod</td>
+              <td>PaymentMethod</td>
+              <td>Método de pago utilizado</td>
+            </tr>
+            <tr>
+              <td>reference</td>
+              <td>String</td>
+              <td>Referencia única de la transacción</td>
+            </tr>
+            <tr>
+              <td>type</td>
+              <td>Type</td>
+              <td>Tipo de transacción</td>
+            </tr>
+            <tr>
+              <td rowspan="10" colspan="1">
+                <h4>User</h4>
+              </td>
+              <td>id</td>
+              <td>String</td>
+              <td>Id único de la entidad</td>
+            </tr>
+            <tr>
+              <td>createdTime</td>
+              <td>String</td>
+              <td>Fecha y hora de creación</td>
+            </tr>
+            <tr>
+              <td>alias</td>
+              <td>String</td>
+              <td>Seudónimo del usuario</td>
+            </tr>
+            <tr>
+              <td>name</td>
+              <td>String</td>
+              <td>Nombre completo del usuario</td>
+            </tr>
+            <tr>
+              <td>email</td>
+              <td>String</td>
+              <td>Correo electrónico del usuario</td>
+            </tr>
+            <tr>
+              <td>phone</td>
+              <td>String</td>
+              <td>Teléfono del usuario</td>
+            </tr>
+            <tr>
+              <td>birthDate</td>
+              <td>String</td>
+              <td>Fecha de nacimiento del usuario</td>
+            </tr>
+            <tr>
+              <td>status</td>
+              <td>Status</td>
+              <td>Estado actual del usuario</td>
+            </tr>
+            <tr>
+              <td>password</td>
+              <td>String</td>
+              <td>Contraseña (hasheada) del usuario</td>
+            </tr>
+            <tr>
+              <td>roles</td>
+              <td>Set(Role)</td>
+              <td>Conjunto de roles que posee el usuario</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <h3>Descripción de las entidades</h3>
+      <h4>Donation</h4>
+      <p>Está relacionada a todas las donaciones que se hagan para un torneo específico.</p>
+      <h4>Game</h4>
+      <p>Esta entidad contiene la información de todos los videojuegos que se pueden jugar en un torneo particular.</p>
+      <h5>🟣 Value Objects</h5>
       <ul>
-        <li>Definición Funcional</li>
-        <li>Entidades</li>
-        <li>Casos de Uso</li>
-        <li>Diagramas</li>
-        <li>Endpoints</li>
-        <li>Tecnologías Utilizadas</li>
-        <li>Instalación</li>
+        <li>Classification: Enum - <span>PEGI3</span> <span>PEGI7</span> <span>PEGI12</span> <span>PEGI16</span>
+          <span>PEGI18</span></li>
+        <li>Console: Enum - <span>PLAYSTATION</span> <span>XBOX</span> <span>PC</span> <span>SWITCH</span></li>
+      </ul>
+      <h4>Match</h4>
+      <p>Está relacionada a las partidas que se van a jugar en un torneo en particular. Relaciona a los participantes
+        que se van a enfrentar y contiene también al ganador de dicha partida cuando ésta finalice.</p>
+      <h5>🟣 Value Objects</h5>
+      <ul>
+        <li>Status: Enum - <span>NOT_STARTED</span> <span>IN_PROGRESS</span> <span>FINISHED</span> <span>CANCELED</span>
+        </li>
+      </ul>
+      <h4>Registration</h4>
+      <p>Contiene la información relacionada al registro de un participante en un torneo. Sirve para tener claro si un
+        participante se registró o no a un torneo particular.</p>
+      <h5>🟣 Value Objects</h5>
+      <ul>
+        <li>Status: Enum - <span>PENDING</span> <span>APPROVED</span> <span>CANCELED</span> <span>ENDED</span></li>
+      </ul>
+      <h4>Reward</h4>
+      <p>Contiene información sobre el podio de participantes y sus respectivos premios monetarios</p>
+      <h4>Ticket</h4>
+      <p>Esta entidad contiene toda la información relacionada a los ticket de participación y visualización que se
+        pueden adquirir.</p>
+      <h5>🟣 Value Objects</h5>
+      <ul>
+        <li>Status: Enum - <span>NEW</span> <span>USED</span> <span>BLOCKED</span></li>
+        <li>Type: Enum - <span>VISUALIZATION</span> <span>PARTICIPATION</span></li>
+      </ul>
+      <h4>Tournament</h4>
+      <p>Esta es la entidad principal del sistema. Todo gira en torno a los torneos. Contiene información de
+        participantes, moderadores, y todo lo relacionado con la realización de un torneo.</p>
+      <h5>🟣 Value Objects</h5>
+      <ul>
+        <li>Status: Enum - <span>NOT_STARTED</span> <span>IN_PROGRESS</span> <span>FINISHED</span> <span>CANCELED</span>
+        </li>
+        <li>Commission: Object
+          <ul>
+            <li>VisualizationPercentage: Float</li>
+            <li>ParticipationPercentage: Float</li>
+            <li>DonationPercentage: Float</li>
+          </ul>
+        </li>
+        <li>Price: Object
+          <ul>
+            <li>Participation: BigDecimal</li>
+            <li>Visualization: BigDecimal</li>
+          </ul>
+        </li>
+        <li>Transmission: Object
+          <ul>
+            <li>Platform: Enum - <span>TWITCH</span> <span>YOUTUBE</span> <span>DISCORD</span></li>
+            <li>url: String</li>
+          </ul>
+        </li>
+      </ul>
+      <h4>Transaction</h4>
+      <p>A tráves de esta entidad se puede llevar el registro de las transacciones y pagos sobre los tickets que se
+        adquieran o las donaciones que se realicen.</p>
+      <h5>🟣 Value Objects</h5>
+      <ul>
+        <li>Status: Enum - <span>APPROVED</span> <span>REJECTED</span> <span>IN_PROCESS</span> <span>STARTED</span></li>
+        <li>Type: Enum - <span>VISUALIZATION</span> <span>PARTICIPATION</span> <span>DONATION</span></li>
+      </ul>
+      <h4>User</h4>
+      <p>Son las entidades que harán uso del sistema. Pueden visualizar torneos, participar en ellos, o gestionarlos
+        (dependiendo de su Rrol).</p>
+      <h5>🟣 Value Objects</h5>
+      <ul>
+        <li>Status: Enum - <span>ACTIVE</span> <span>BANNED</span></li>
+        <li>Role: Enum - <span>VIEWER</span> <span>PROMOTER</span> <span>ADMINISTRATOR</span> <span>PARTICIPANT</span>
+          <span>MODERATOR</span></li>
       </ul>
     </div>
-
     <div class="sub-seccion">
-      <h3>Compra de Tickets</h3>
-      <p>Facilita la adquisición de entradas para torneos en línea con código QR.</p>
-    </div>
-
-    <div class="sub-seccion">
-      <h3>Notificaciones y Alertas</h3>
-      <p>Envía notificaciones automáticas a participantes y organizadores.</p>
-    </div>
+      <h3>Casos de uso</h3>
+      <p>A continuación se listarán todos los casos de uso que se plantearon para la solución junto con las reglas de
+        negocio asociadas</p>
+      <h4>Tournament</h4>
+      <ul>
+        <li>
+          <h5>Registrar un torneo</h5>
+          <ul>
+            <li>El usuario que registra un torneo no puede tener estado BANNED</li>
+            <li>El usuario que registra un torneo debe tener rol ADMINISTRATOR o PROMOTER</li>
+            <li>Un usuario ADMINISTRATOR puede generar la cantidad de torneos gratis o de pago que desee</li>
+            <li>Si el usuario es PROMOTER y el torneo es gratis, se validará si aún no supera la cantidad máxima de
+              torneos gratis permitidos</li>
+            <li>Registrar el torneo con estado NOT_STARTED</li>
+            <li>La cantiadad de plazas disponibles será igual al campo de plazas máximas</li>
+            <li>Notificar al promotor via SMS y/o email el registro exitoso del torneo</li>
+          </ul>
+        </li>
+        <li>
+          <h5>Empezar un torneo</h5>
+          <ul>
+            <li>El usuario realiza la acción no puede tener estado BANNED</li>
+            <li>El usuario que realiza la acción debe tener rol ADMINISTRATOR, PROMOTER o MODERATOR. Para estos dos
+              últimos, el rol lo deben tener dentro del torneo en cuestión</li>
+            <li>Validar que el estado del torneo no sea FINISHED, CANCELED o IN_PROGRESS</li>
+            <li>Validar que el torneo ya haya alcanzado la cantidad de plazas mínimas de participación</li>
+            <li>Validar que la fecha de inicio del torneo efectivamente ya se alcanzó</li>
+            <li>Actualizar el estado del torneo a IN_PROGRESS</li>
+            <li>Notificar al promotor via SMS y/o email la puesta en marcha del torneo</li>
+            <li>Notificar a los moderadores via SMS y/o email la puesta en marcha del torneo</li>
+            <li>Notificar a los participantes via SMS y/o email la puesta en marcha del torneo</li>
+            <li>Notificar a los espectadores via SMS y/o email la puesta en marcha del torneo</li>
+          </ul>
+        </li>
+        <li>
+          <h5>Cancelar un torneo</h5>
+          <ul>
+            <li>El usuario realiza la acción no puede tener estado BANNED</li>
+            <li>El usuario que realiza la acción debe tener rol ADMINISTRATOR o PROMOTER. Para este último, el rol lo
+              debe tener dentro del torneo en cuestión</li>
+            <li>Validar que el estado del torneo no sea FINISHED o CANCELED</li>
+            <li>Actualizar el estado del torneo a CANCELED</li>
+            <li>Notificar al promotor via SMS y/o email la cancelación del torneo</li>
+            <li>Notificar a los moderadores via SMS y/o email la cancelación del torneo</li>
+            <li>Notificar a los participantes via SMS y/o email la cancelación del torneo</li>
+            <li>Notificar a los espectadores via SMS y/o email la cancelación del torneo</li>
+          </ul>
+        </li>
+        <li>
+          <h5>Finalizar un torneo</h5>
+          <ul>
+            <li>El usuario realiza la acción no puede tener estado BANNED</li>
+            <li>El usuario que realiza la acción debe tener rol ADMINISTRATOR, PROMOTER o MODERATOR. Para estos dos
+              últimos, el rol lo deben tener dentro del torneo en cuestión</li>
+            <li>Validar que el estado del torneo no sea NOT_STARTED, FINISHED o CANCELED</li>
+            <li>Validar que la fecha de fin del torneo efectivamente ya se alcanzó</li>
+            <li>Validar que no existan Matches asociadas a este torneo que estén en estado NOT_STARTED o IN_PROGRESS
+            </li>
+            <li>Actualizar el estado del torneo a FINISHED</li>
+            <li>En la petición debe estar presente el premio asociado al torneo, en donde se relacione la tabla de
+              posiciones</li>
+            <li>Notificar al promotor via SMS y/o email la finalización del torneo</li>
+            <li>Notificar a los moderadores via SMS y/o email la finalización del torneo</li>
+            <li>Notificar a los participantes via SMS y/o email la finalización del torneo</li>
+            <li>Notificar a los espectadores via SMS y/o email la finalización del torneo</li>
+          </ul>
+        </li>
+        <li>
+          <h5>Reagendar un torneo</h5>
+          <ul>
+            <li>El usuario realiza la acción no puede tener estado BANNED</li>
+            <li>El usuario que realiza la acción debe tener rol ADMINISTRATOR, PROMOTER o MODERATOR. Para estos dos
+              últimos, el rol lo deben tener dentro del torneo en cuestión</li>
+            <li>Actualizar las fechas de inicio y/o fin</li>
+            <li>Notificar al promotor via SMS y/o email el reagendamiento del torneo</li>
+            <li>Notificar a los moderadores via SMS y/o email el reagendamiento del torneo</li>
+            <li>Notificar a los participantes via SMS y/o email el reagendamiento del torneo</li>
+            <li>Notificar a los espectadores via SMS y/o email el reagendamiento del torneo</li>
+          </ul>
+        </li>
+        <li>
+          <h5>Agregar un moderador a un torneo</h5>
+          <ul>
+            <li>El usuario realiza la acción no puede tener estado BANNED</li>
+            <li>El o los usuarios que se agregarán como MODERATOR no puede tener estado BANNED</li>
+            <li>El usuario que realiza la acción debe tener rol ADMINISTRATOR, PROMOTER o MODERATOR. Para estos dos
+              últimos, el rol lo deben tener dentro del torneo en cuestión</li>
+            <li>Validar que la cantidad de moderadores a agregar más los que ya tiene el torneo no superen la cantidad
+              máxima establecida</li>
+            <li>Actualizar el torneo con los nuevos moderadores</li>
+            <li>Notificar al promotor via SMS y/o email la inclusión de un nuevo moderador</li>
+            <li>Notificar a los moderadores via SMS y/o email la inclusión de un nuevo moderador</li>
+          </ul>
+        </li>
+        <li>
+          <h5>Eliminar un moderador de un torneo</h5>
+          <ul>
+            <li>El usuario realiza la acción no puede tener estado BANNED</li>
+            <li>El usuario que realiza la acción debe tener rol ADMINISTRATOR o PROMOTER. Para este últimos, el rol lo
+              debe tener dentro del torneo en cuestión</li>
+            <li>Actualizar el torneo eliminando al moderador</li>
+            <li>Notificar al promotor via SMS y/o email la eliminación del moderador</li>
+            <li>Notificar a los moderadores via SMS y/o email la eliminación del moderador</li>
+          </ul>
+        </li>
+        <li>
+          <h5>Pre-registrar un participante</h5>
+          <ul>
+            <li>El usuario realiza la acción no puede tener estado BANNED</li>
+            <li>El usuario que realiza la acción debe tener rol PARTICIPANT</li>
+            <li>Validar que el usuario no tenga un pre-registro en este torneo o que ya esté como participante</li>
+            <li>Validar que el usuario no esté en la lista de descalificados</li>
+            <li>Validar que el torneo no haya iniciado aún, que esté cancelado o que ya haya terminado. Que no esté en
+              estado IN_PROGRESS, FINISHED o CANCELED</li>
+            <li>Si el torneo es de pago, crear un registro de Transaction de tipo PARTICIPATION y estado STARTED</li>
+            <li>Si el torneo es de gratis, crear un registro de Transaction de tipo PARTICIPATION y estado APPROVED</li>
+            <li>Crear un registro en Registration con estado PENDING</li>
+            <li>Actualizar, para el torneo, la lista de pre-registros del torneo agregando al nuevo pre-registrado</li>
+            <li>Actualizar en el torneo la cantidad de plazas restantes, restando este número en 1</li>
+            <li>Notificar al promotor via SMS y/o email el pre-registro al torneo</li>
+            <li>Notificar a los moderadores via SMS y/o email el pre-registro al torneo</li>
+            <li>Notificar al pre-registrado via SMS y/o email el pre-registro al torneo</li>
+          </ul>
+        </li>
+        <li>
+          <h5>Registrar un participante previamente pre-registrado</h5>
+          <ul>
+            <li>El usuario realiza la acción no puede tener estado BANNED</li>
+            <li>El usuario que realiza la acción debe tener rol PARTICIPANT</li>
+            <li>Validar que el usuario tenga un pre-registro en este torneo</li>
+            <li>Validar que el usuario no sea ya un participante activo</li>
+            <li>Validar que el usuario no esté en la lista de descalificados</li>
+            <li>Validar que el torneo no haya iniciado aún, que esté cancelado o que ya haya terminado. Que no esté en
+              estado IN_PROGRESS, FINISHED o CANCELED</li>
+            <li>Validar que tenga un ticket en estado NEW</li>
+            <li>Actualizar el registro en Registration con estado APPROVED</li>
+            <li>Actualizar, para el torneo, la lista de pre-registros del torneo eliminando al participante</li>
+            <li>Actualizar, para el torneo, la lista de registros del torneo agregando al nuevo participante</li>
+            <li>Actualizar el estado del ticket a USED</li>
+            <li>Notificar al promotor via SMS y/o email el registro exitoso en el torneo</li>
+            <li>Notificar a los moderadores via SMS y/o email el registro exitoso en el torneo</li>
+            <li>Notificar al participante via SMS y/o email el registro exitoso en el torneo</li>
+          </ul>
+        </li>
+        <li>
+          <h5>Pre-registrar un espectador</h5>
+          <ul>
+            <li>El usuario realiza la acción no puede tener estado BANNED</li>
+            <li>El usuario que realiza la acción debe tener rol VIEWER</li>
+            <li>Validar que el torneo no haya iniciado aún, que esté cancelado o que ya haya terminado. Que no esté en
+              estado IN_PROGRESS, FINISHED o CANCELED</li>
+            <li>Si el torneo es de pago, crear un registro de Transaction de tipo VISUALIZATION y estado STARTED</li>
+            <li>Si el torneo es de gratis, crear un registro de Transaction de tipo VISUALIZATION y estado APPROVED</li>
+            <li>Notificar al promotor via SMS y/o email el pre-registro de visualización torneo</li>
+            <li>Notificar a los moderadores via SMS y/o email el pre-registro de visualización torneo</li>
+            <li>Notificar al pre-registrado via SMS y/o email el pre-registro de visualización torneo</li>
+          </ul>
+        </li>
+        <li>
+          <h5>Registrar un espectador previamente pre-registrado</h5>
+          <ul>
+            <li>El usuario realiza la acción no puede tener estado BANNED</li>
+            <li>El usuario que realiza la acción debe tener rol VIEWER</li>
+            <li>Validar que el torneo no haya iniciado aún, que esté cancelado o que ya haya terminado. Que no esté en
+              estado IN_PROGRESS, FINISHED o CANCELED</li>
+            <li>Validar que tenga un ticket en estado NEW</li>
+            <li>Actualizar el estado del ticket a USED</li>
+            <li>Retornar la información de Transmissions perteneciente al torneo</li>
+            <li>Notificar al promotor via SMS y/o email el registro de visualización torneo</li>
+            <li>Notificar a los moderadores via SMS y/o email el registro de visualización torneo</li>
+            <li>Notificar al espectador via SMS y/o email el registro de visualización torneo</li>
+          </ul>
+        </li>
+        <li>
+          <h5>Descalificar un participante</h5>
+          <ul>
+            <li>El usuario realiza la acción no puede tener estado BANNED</li>
+            <li>El usuario que realiza la acción debe tener rol ADMINISTRATOR, PROMOTER o MODERATOR. Para estos dos
+              últimos, el rol lo deben tener dentro del torneo en cuestión</li>
+            <li>Validar que el torneo no esté en estado FINISHED o CANCELED</li>
+            <li>Validar que el participante esté en la lista de pre-registro o en la lista de participantes</li>
+            <li>Remover al usuario tanto de la lista de pre-registro como de la lista de participantes (cualquiera en la
+              que esté)</li>
+            <li>Agregar al usuario a la lista de descalificados</li>
+            <li>Notificar al promotor via SMS y/o email la descalificación del torneo</li>
+            <li>Notificar a los moderadores via SMS y/o email la descalificación del torneo</li>
+            <li>Notificar al participante via SMS y/o email la descalificación del torneo</li>
+          </ul>
+        </li>
+      </ul>
+      <h4>Match</h4>
+      <ul>
+        <li>
+          <h5>Registrar una partida</h5>
+          <ul>
+            <li>El usuario realiza la acción no puede tener estado BANNED</li>
+            <li>El usuario que realiza la acción debe tener rol ADMINISTRATOR, PROMOTER o MODERATOR. Para estos dos
+              últimos, el rol lo deben tener dentro del torneo en cuestión</li>
+            <li>Validar que todos los usuarios que se van a registrar al torneo sean efectivamente participantes</li>
+            <li>Registrar la partida en estado NOT_STARTED</li>
+          </ul>
+        </li>
+        <li>
+          <h5>Cancelar una partida</h5>
+          <ul>
+            <li>El usuario realiza la acción no puede tener estado BANNED</li>
+            <li>El usuario que realiza la acción debe tener rol ADMINISTRATOR, PROMOTER o MODERATOR. Para estos dos
+              últimos, el rol lo deben tener dentro del torneo en cuestión</li>
+            <li>Validar que la partida no esté en estado FINISHED o CANCELED</li>
+            <li>Actualizar la partida a estado CANCELED</li>
+            <li>Notificar al promotor via SMS y/o email la cancelación de la partida</li>
+            <li>Notificar a los moderadores via SMS y/o email la cancelación de la partida</li>
+            <li>Notificar a los participantes via SMS y/o email la cancelación de la partida</li>
+            <li>Notificar a los espectadores via SMS y/o email la cancelación de la partida</li>
+          </ul>
+        </li>
+        <li>
+          <h5>Reagendar una partida</h5>
+          <ul>
+            <li>El usuario realiza la acción no puede tener estado BANNED</li>
+            <li>El usuario que realiza la acción debe tener rol ADMINISTRATOR, PROMOTER o MODERATOR. Para estos dos
+              últimos, el rol lo deben tener dentro del torneo en cuestión</li>
+            <li>Validar que la partida no esté en estado FINISHED o CANCELED</li>
+            <li>Actualizar la partida con la nueva fecha de inicio</li>
+            <li>Notificar al promotor via SMS y/o email el reagendamiento de la partida</li>
+            <li>Notificar a los moderadores via SMS y/o email el reagendamiento de la partida</li>
+            <li>Notificar a los participantes via SMS y/o email el reagendamiento de la partida</li>
+            <li>Notificar a los espectadores via SMS y/o email el reagendamiento de la partida</li>
+          </ul>
+        </li>
+        <li>
+          <h5>Empezar una partida</h5>
+          <ul>
+            <li>El usuario realiza la acción no puede tener estado BANNED</li>
+            <li>El usuario que realiza la acción debe tener rol ADMINISTRATOR, PROMOTER o MODERATOR. Para estos dos
+              últimos, el rol lo deben tener dentro del torneo en cuestión</li>
+            <li>Validar que la partida no esté en estado IN_PROGRESS FINISHED o CANCELED</li>
+            <li>Validar que la fecha de inicio ya haya llegado</li>
+            <li>Actualizar la partida con estado IN_PROGRESS y con la fecha y hora de inicio</li>
+            <li>Notificar al promotor via SMS y/o email el comienzo de la partida</li>
+            <li>Notificar a los moderadores via SMS y/o email el comienzo de la partida</li>
+            <li>Notificar a los participantes via SMS y/o email el comienzo de la partida</li>
+            <li>Notificar a los espectadores via SMS y/o email el comienzo de la partida</li>
+          </ul>
+        </li>
+        <li>
+          <h5>Terminar una partida</h5>
+          <ul>
+            <li>El usuario realiza la acción no puede tener estado BANNED</li>
+            <li>El usuario que realiza la acción debe tener rol ADMINISTRATOR, PROMOTER o MODERATOR. Para estos dos
+              últimos, el rol lo deben tener dentro del torneo en cuestión</li>
+            <li>Validar que el ganador esté registrado dentro de la partida</li>
+            <li>Validar que la partida no esté en estado NOT_STARTED FINISHED o CANCELED</li>
+            <li>Actualizar la partida con estado FINISHED, con la fecha y hora de finalización y con el id del ganador
+            </li>
+            <li>Notificar al promotor via SMS y/o email la finalización de la partida</li>
+            <li>Notificar a los moderadores via SMS y/o email la finalización de la partida</li>
+            <li>Notificar a los participantes via SMS y/o email la finalización de la partida</li>
+            <li>Notificar a los espectadores via SMS y/o email la finalización de la partida</li>
+          </ul>
+        </li>
+      </ul>
+      <h4>Ticket</h4>
+      <ul>
+        <li>
+          <h5>Registrar un Ticket</h5>
+          <ul>
+            <li>El usuario realiza la acción no puede tener estado BANNED</li>
+            <li>El usuario que realiza la acción debe tener rol VIEWER o PARTICIPANT</li>
+            <li>Validar que la transacción asociada al ticket tenga estado APPROVED (Significa que el pago ya fue hecho
+              en caso de que el torneo fuera de pago)</li>
+            <li>Crear el QR asociado al ticket</li>
+            <li>Registrar un nuevo ticket en estado NEW y el QR previamente creado</li>
+            <li>Notificar al espectador o participante via SMS y/o email la creación del ticket y enviar la información
+              de éste (junto con la imagen del QR) en el mismo correo</li>
+          </ul>
+        </li>
+        <li>
+          <h5>Bloquear un Ticket</h5>
+          <ul>
+            <li>El usuario realiza la acción no puede tener estado BANNED</li>
+            <li>El usuario que realiza la acción debe tener rol ADMINISTRATOR, PROMOTER o MODERATOR. Para estos dos
+              últimos, el rol lo deben tener dentro del torneo en cuestión</li>
+            <li>Validar que el ticket no haya sido bloqueado previamente</li>
+            <li>Notificar al espectador o participante via SMS y/o email la cancelación del ticket</li>
+          </ul>
+        </li>
+        <li>
+          <h5>Usar un Ticket</h5>
+          <ul>
+            <li>El usuario realiza la acción no puede tener estado BANNED</li>
+            <li>El usuario que realiza la acción debe tener rol VIEWER o PARTICIPANT</li>
+            <li>Validar que el ticket esté en estado NEW</li>
+            <li>Cambiar el estado del ticket a USED</li>
+          </ul>
+        </li>
+      </ul>
+      <h4>Donation</h4>
+      <ul>
+        <li>
+          <h5>Registrar una donación</h5>
+          <ul>
+            <li>El usuario realiza la acción no puede tener estado BANNED</li>
+            <li>Validar que el torneo no esté en estado FINISHED o CANCELED</li>
+            <li>Registrar un nuevo ticket en estado NEW y el QR previamente creado</li>
+            <li>Registrar la nueva donación junto con su transacción asociada</li>
+          </ul>
+        </li>
+      </ul>
+      <h4>User</h4>
+      <ul>
+        <li>
+          <h5>Registrar un nuevo usuario</h5>
+          <ul>
+            <li>Registrar el nuevo usuario con todos sus datos</li>
+          </ul>
+        </li>
+        <li>
+          <h5>Banear a un usuario</h5>
+          <ul>
+            <li>El usuario realiza la acción no puede tener estado BANNED</li>
+            <li>Quien realiza la acción debe ser un ADMINISTRATOR</li>
+            <li>Actualizar al usuario con el estado BANNED</li>
+          </ul>
+        </li>
+      </ul>
+  </section>
   </section>
 
   <section id="diagramas">
     <h2>Diagramas</h2>
     <h3>Arquitectura</h3>
-    <p>Diagrama de arquitectura del sistema.</p>
-    <h3>Despliegue</h3>
-    <p>Diagrama de despliegue y distribución de servicios.</p>
+    <p>Diagrama de arquitectura del sistema. Cabe aclarar que este diagrama se propone como modelo objetivo. Se espera que en iteraciones posteriores se llegue a esta solución totalmente funcional y desplegada en nube</p>
+    <div class="image-container">
+      <img src="img/Despliegue.png" alt="Diagrama de despliegue">
+    </div>
     <h3>Clases</h3>
     <p>Diagrama de clases y relaciones entre entidades.</p>
+    <div class="image-container">
+      <img src="img/Clases.png" alt="Diagrama de clases">
+    </div>
+    <h3>Diagrama de casos de uso</h3>
+    <p>Diagrama de casos de uso y los actores implicados</p>
+    <div class="image-container">
+      <img src="img/Casos de uso.png" alt="Diagrama de casos de uso">
+    </div>
   </section>
 
   <section id="endpoints">
     <h2>Endpoints</h2>
     <p>Listado y descripción de los endpoints de la API.</p>
+    <ul>
+      <li>
+        <h3>Registrar un nuevo torneo: </h3><p>POST - {host}/api/v1/tournaments</p>
+      </li>
+      <li>
+        <h3>Agregar uno o más moderadores: </h3><p>POST - {host}/api/v1/tournaments/{tournamentId}/moderators</p>
+      </li>
+      <li>
+        <h3>Cancelar un torneo: </h3><p>PATCH - {host}/api/v1/tournaments/{tournamentId}/cancel</p>
+      </li>
+      <li>
+        <h3>Descalificar a un participante: </h3><p>DELETE - {host}/api/v1/tournaments/{tournamentId}/users/{userId}</p>
+      </li>
+      <li>
+        <h3>Finalizar un torneo: </h3><p>PATCH - {host}/api/v1/tournaments/{tournamentId}/finalize</p>
+      </li>
+      <li>
+        <h3>Pre-registro: </h3><p>POST - {host}/api/v1/tournaments/{tournamentId}/users/{userId}/pre-register</p>
+      </li>
+      <li>
+        <h3>Registrar participante: </h3><p>POST - {host}/api/v1/tournaments/{tournamentId}/users/{userId}/tickets/{ticketId}/register</p>
+      </li>
+      <li>
+        <h3>Reagendar un torneo: </h3><p>PATCH - {host}/api/v1/tournaments/{tournamentId}/reschedule</p>
+      </li>
+      <li>
+        <h3>Iniciar un torneo: </h3><p>PATCH - {host}/api/v1/tournaments/{tournamentId}/start</p>
+      </li>
+      <li>
+        <h3>Registrar un ticket: </h3><p>POST - {host}/api/v1/tournaments/{tournamentId}/users/{userId}/tickets</p>
+      </li>
+      <li>
+        <h3>Bloquear un ticket: </h3><p>PATCH - {host}/api/v1/users/{userId}/tickets/{ticketId}/block</p>
+      </li>
+      <li>
+        <h3>Registrar una partida: </h3><p>POST - {host}/api/v1/tournaments/{tournamentId}/matches</p>
+      </li>
+      <li>
+        <h3>Cancelar una partida: </h3><p>PATCH - {host}/api/v1/tournaments/{tournamentId}/matches/{matchId}/cancel</p>
+      </li>
+      <li>
+        <h3>Finalizar una partida: </h3><p>PATCH - {host}/api/v1/tournaments/{tournamentId}/matches/{matchId}/finalize</p>
+      </li>
+      <li>
+        <h3>Empezar una partida: </h3><p>PATCH - {host}/api/v1/tournaments/{tournamentId}/matches/{matchId}/start</p>
+      </li>
+    </ul>
   </section>
 
   <section id="tecnologias">
     <h2>Tecnologías Utilizadas</h2>
-    <p>Listado de tecnologías y herramientas utilizadas en el desarrollo.</p>
+    <p>A continuación se listarán las tecnologías que se utilizaron para el desarrollo de la primera versión de la aplicación. Conforme se desarrollen las siguientes iteraciones, se estará actualizando el listado de tecnologías</p>
+    <h3>Orquestador</h3>
+    <p>El desarrollo de este orquestador se realizó con el arquetipo de Clean Architecture de Bancolombia, llamado <a target="_blank" href="https://bancolombia.github.io/scaffold-clean-architecture/docs/intro/">Scaffold Bancolombia</a>. Esto implica el uso del lenguaje de programación Java en su versión 21, junto con el framework más famoso para el desarrollo de aplicaciones en Java, el cual es <a target="_blank" href="https://spring.io/">Spring Framework</a>, junto con tecnologías como lo son Spring Webflux para el manejo de flujos reactivos y para exponer endpoints, así como consumir APIs externas funcionando como un Web Client</p>
+    <h3>Simulación de back-end</h3>
+    <p>Para la simulación del back-end de la aplicación, opté por el uso de una gran herramienta con una muy favorable capa gratuita, la cual es <a href="https://www.airtable.com/">Airtable</a>. Con esta herramienta online puedo almacenar data como si se tratase de una base de datos. Puedo simular microservicios para cada entidad, y también tengo a disposición una API con la cual puedo consultar, modificar y eliminar data a placer a través de pticiones HTTP. Para el consumo seguro, esta aplicación ofrece el uso de tokens Bearer con diferentes alcances.</p>
   </section>
 
   <section id="instalacion">
     <h2>Instrucciones de Instalación</h2>
-    <p>Pasos detallados para instalar y configurar el sistema en local.</p>
+    <p>Para el uso de la aplicación, basta con clonar el repositorio del orquestador y ejecutarlo en cualquier IDE, o desde consola usando comandos gradle. El link del repositorio se lista a continuación: <a target="_blank" href="https://github.com/assessment-pragma-fabian-camilo/AP202503_VideogamesTournamentManagement_Orchestator">AP202503_VideogamesTournamentManagement_Orchestator</a></p>
+    
+    
   </section>
+
+  <section id="gestion-proyecto">
+    <h2>Gestión del proyecto</h2>
+    <p>Me gustaría empezar hablando sobre este tema que tanto protagonismo toma a la hora de realiar la implementación
+      de cualquier sistema de información. Por más pequeño o simple que este parezca, una buena gestión es vital para
+      que todo salga dela mejor manera.</p>
+    <div class="sub-seccion">
+      <h4>JIRA</h4>
+      <p>En mi caso, lo primero que hice fue buscar una buena herramienta para la gestión de proyectos, y finalmente di
+        con una que en el mercado es de las mejores: <a target="_blank" href="https://www.atlassian.com/es/software/jira">Jira</a></p>
+      <p>En esta herramienta creé un proyecto, y dentro de este <strong>proyecto</strong>, creé una
+        <strong>épica</strong>. Esta épica tiene el alcance de tener una MVP del sistema, con algunos casos de uso
+        implementados. Hay que tener en cueta que esto es un proyecto evolutivo y, por tanto, en siguientes iteraciones
+        se buscará tanto la mejora en cuestiones técnicas como la implementación de nuevos casos de uso
+      </p>
+      <p>Así se ve (al momento de escribir esta documentación) el cronograma de la <strong>épica</strong>, las
+        <strong>historias de usuario</strong> y las <strong>tareas</strong>
+      </p>
+      <div class="image-container">
+        <img src="img/panel de control jira.jpg" alt="Panel de control de Jira en el proyecto assessment-pragma-fabian-camilo">
+      </div>
+      <h4>GitHub</h4>
+      <p>La plataforma para gestión de repositorios por excelencia... <a target="_blank" href="https://github.com/">GitHub</a></p>
+      <p>Quise tener más control al momento de gestionar mis repositorios para el desarrollo de esta plataforma, por lo
+        que lo primero que hice fue generar una organización centrada exclusivamente al assessment en Pragma, y ya
+        dentro de esta organización tengo los repositorios necesarios para esta entrega y posibles futuras entregas de
+        sistemas diferentes (aunque la idea es que este proyecto se continue en los demás assessment)</p>
+      <p>Así se ve (al momento de escribir esta documentación) la organización
+        <strong>assessment-pragma-fabian-camilo</strong>
+      </p>
+      <div class="image-container">
+        <img src="img/repositorios github.jpg" alt="Repositorios de GitHub en la organización assessment-pragma-fabian-camilo">
+      </div>
+      <h4>Integración entre Jira y GitHub</h4>
+      <p>Una de las cosas más importantes es que el tablero de Jira lo puedo alimentar con los commits y pull requests
+        que vaya generando en mis repositorios para esta organización de GitHub.</p>
+      <p>Así, cada tarea o historia de usuario que vaya generando tiene su pull request que sustenta la culminación de
+        ésta</p>
+      <div class="image-container">
+        <img src="img/integracion de jira con github.jpg" alt="Muestra la integración de Jira con GitHub">
+      </div>
+      <div class="image-container">
+        <img src="img/pr en tarea jira.jpg" alt="Muesta cómo se ve un Pull Request en una tarea en Jira">
+      </div>
+    </div>
+  </section>
+  <button id="scrollToTopBtn" class="scroll-to-top" onclick="scrollToTop()">▲</button>
 </body>
 
 </html>
