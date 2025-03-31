@@ -11,8 +11,10 @@
 
 <body>
   <header>
-    <h1>Documentación - Gestión de Torneos de Videojuegos</h1>
-    <nav>
+    <h1>Gestión de Torneos de Videojuegos - Documentación</h1>
+  </header>
+  <nav>
+    <div>
       <ul>
         <li><a href="#introduccion">Introducción</a></li>
         <li><a href="#definicion-funcional">Definición Funcional</a></li>
@@ -22,9 +24,8 @@
         <li><a href="#instalacion">Instalación</a></li>
         <li><a href="#gestion-proyecto">Gestión del proyecto</a></li>
       </ul>
-    </nav>
-  </header>
-
+    </div>
+  </nav>
   <section id="introduccion">
     <h2>Introducción</h2>
     <p>A continuación se describirá de forma completa toda la solución en fase inicial (primera itereración) para el
@@ -497,7 +498,8 @@
       <h5>🟣 Value Objects</h5>
       <ul>
         <li>Classification: Enum - <span>PEGI3</span> <span>PEGI7</span> <span>PEGI12</span> <span>PEGI16</span>
-          <span>PEGI18</span></li>
+          <span>PEGI18</span>
+        </li>
         <li>Console: Enum - <span>PLAYSTATION</span> <span>XBOX</span> <span>PC</span> <span>SWITCH</span></li>
       </ul>
       <h4>Match</h4>
@@ -567,7 +569,8 @@
       <ul>
         <li>Status: Enum - <span>ACTIVE</span> <span>BANNED</span></li>
         <li>Role: Enum - <span>VIEWER</span> <span>PROMOTER</span> <span>ADMINISTRATOR</span> <span>PARTICIPANT</span>
-          <span>MODERATOR</span></li>
+          <span>MODERATOR</span>
+        </li>
       </ul>
     </div>
     <div class="sub-seccion">
@@ -903,7 +906,8 @@
   <section id="diagramas">
     <h2>Diagramas</h2>
     <h3>Arquitectura</h3>
-    <p>Diagrama de arquitectura del sistema. Cabe aclarar que este diagrama se propone como modelo objetivo. Se espera que en iteraciones posteriores se llegue a esta solución totalmente funcional y desplegada en nube</p>
+    <p>Diagrama de arquitectura del sistema. Cabe aclarar que este diagrama se propone como modelo objetivo. Se espera
+      que en iteraciones posteriores se llegue a esta solución totalmente funcional y desplegada en nube</p>
     <div class="image-container">
       <img src="img/Despliegue.png" alt="Diagrama de despliegue">
     </div>
@@ -921,70 +925,157 @@
 
   <section id="endpoints">
     <h2>Endpoints</h2>
-    <p>Listado y descripción de los endpoints de la API.</p>
-    <ul>
-      <li>
-        <h3>Registrar un nuevo torneo: </h3><p>POST - {host}/api/v1/tournaments</p>
-      </li>
-      <li>
-        <h3>Agregar uno o más moderadores: </h3><p>POST - {host}/api/v1/tournaments/{tournamentId}/moderators</p>
-      </li>
-      <li>
-        <h3>Cancelar un torneo: </h3><p>PATCH - {host}/api/v1/tournaments/{tournamentId}/cancel</p>
-      </li>
-      <li>
-        <h3>Descalificar a un participante: </h3><p>DELETE - {host}/api/v1/tournaments/{tournamentId}/users/{userId}</p>
-      </li>
-      <li>
-        <h3>Finalizar un torneo: </h3><p>PATCH - {host}/api/v1/tournaments/{tournamentId}/finalize</p>
-      </li>
-      <li>
-        <h3>Pre-registro: </h3><p>POST - {host}/api/v1/tournaments/{tournamentId}/users/{userId}/pre-register</p>
-      </li>
-      <li>
-        <h3>Registrar participante: </h3><p>POST - {host}/api/v1/tournaments/{tournamentId}/users/{userId}/tickets/{ticketId}/register</p>
-      </li>
-      <li>
-        <h3>Reagendar un torneo: </h3><p>PATCH - {host}/api/v1/tournaments/{tournamentId}/reschedule</p>
-      </li>
-      <li>
-        <h3>Iniciar un torneo: </h3><p>PATCH - {host}/api/v1/tournaments/{tournamentId}/start</p>
-      </li>
-      <li>
-        <h3>Registrar un ticket: </h3><p>POST - {host}/api/v1/tournaments/{tournamentId}/users/{userId}/tickets</p>
-      </li>
-      <li>
-        <h3>Bloquear un ticket: </h3><p>PATCH - {host}/api/v1/users/{userId}/tickets/{ticketId}/block</p>
-      </li>
-      <li>
-        <h3>Registrar una partida: </h3><p>POST - {host}/api/v1/tournaments/{tournamentId}/matches</p>
-      </li>
-      <li>
-        <h3>Cancelar una partida: </h3><p>PATCH - {host}/api/v1/tournaments/{tournamentId}/matches/{matchId}/cancel</p>
-      </li>
-      <li>
-        <h3>Finalizar una partida: </h3><p>PATCH - {host}/api/v1/tournaments/{tournamentId}/matches/{matchId}/finalize</p>
-      </li>
-      <li>
-        <h3>Empezar una partida: </h3><p>PATCH - {host}/api/v1/tournaments/{tournamentId}/matches/{matchId}/start</p>
-      </li>
-    </ul>
+    <p>Listado y descripción de los endpoints de la API. Para la variable <span>{host}</span> se deberá usar el host del
+      API Gateway y no de los servicios aislados</p>
+
+    <p><strong>Registrar un nuevo torneo:</strong> <span>POST - {host}/api/v1/orchestrator/tournaments</span></span></p>
+    <p><strong>Agregar uno o más moderadores:</strong> <span>POST -
+        {host}/api/v1/orchestrator/tournaments/{tournamentId}/moderators</span></p>
+    <p><strong>Cancelar un torneo:</strong> <span>PATCH -
+        {host}/api/v1/orchestrator/tournaments/{tournamentId}/cancel</span></p>
+    <p><strong>Descalificar a un participante:</strong> <span>DELETE -
+        {host}/api/v1/orchestrator/tournaments/{tournamentId}/users/{userId}</span></p>
+    <p><strong>Finalizar un torneo:</strong> <span>PATCH -
+        {host}/api/v1/orchestrator/tournaments/{tournamentId}/finalize</span></p>
+    <p><strong>Pre-registro:</strong> <span>POST -
+        {host}/api/v1/orchestrator/tournaments/{tournamentId}/users/{userId}/pre-register</span></p>
+    <p><strong>Registrar participante:</strong> <span>POST -
+        {host}/api/v1/orchestrator/tournaments/{tournamentId}/users/{userId}/tickets/{ticketId}/register</span></p>
+    <p><strong>Reagendar un torneo:</strong> <span>PATCH -
+        {host}/api/v1/orchestrator/tournaments/{tournamentId}/reschedule</span></p>
+    <p><strong>Iniciar un torneo:</strong> <span>PATCH -
+        {host}/api/v1/orchestrator/tournaments/{tournamentId}/start</span></p>
+    <p><strong>Registrar un ticket:</strong> <span>POST -
+        {host}/api/v1/orchestrator/tournaments/{tournamentId}/users/{userId}/tickets</span></p>
+    <p><strong>Bloquear un ticket:</strong> <span>PATCH -
+        {host}/api/v1/orchestrator/users/{userId}/tickets/{ticketId}/block</span></p>
+    <p><strong>Registrar una partida:</strong> <span>POST -
+        {host}/api/v1/orchestrator/tournaments/{tournamentId}/matches</span></p>
+    <p><strong>Cancelar una partida:</strong> <span>PATCH -
+        {host}/api/v1/orchestrator/tournaments/{tournamentId}/matches/{matchId}/cancel</span></p>
+    <p><strong>Finalizar una partida:</strong> <span>PATCH -
+        {host}/api/v1/orchestrator/tournaments/{tournamentId}/matches/{matchId}/finalize</span></p>
+    <p><strong>Empezar una partida:</strong> <span>PATCH -
+        {host}/api/v1/orchestrator/tournaments/{tournamentId}/matches/{matchId}/start</span></p>
+    <p><strong>Obtener un usuario:</strong> <span>GET - {host}/v0/{tableId}/User/{id}</span></p>
+    <p><strong>Obtener una lista de usuarios:</strong> <span>GET - {host}/v0/{tableId}/User</span></p>
+    <p><strong>Obtener una donacion:</strong> <span>GET - {host}/v0/{tableId}/Donation/{id}</span></p>
+    <p><strong>Obtener una lista de donaciones:</strong> <span>GET - {host}/v0/{tableId}/Donation</span></p>
+    <p><strong>Obtener un ticket:</strong> <span>GET - {host}/v0/{tableId}/Ticket/{id}</span></p>
+    <p><strong>Obtener una lista de tickets:</strong> <span>GET - {host}/v0/{tableId}/Ticket</span></p>
+    <p><strong>Obtener un torneo:</strong> <span>GET - {host}/v0/{tableId}/Tournament/{id}</span></p>
+    <p><strong>Obtener una lista de torneos:</strong> <span>GET - {host}/v0/{tableId}/Tournament</span></p>
+    <p><strong>Obtener una transacción:</strong> <span>GET - {host}/v0/{tableId}/Transaction/{id}</span></p>
+    <p><strong>Obtener una lista de transacciones:</strong> <span>GET - {host}/v0/{tableId}/Transaction</span></p>
+    <p><strong>Obtener un juego:</strong> <span>GET - {host}/v0/{tableId}/Game/{id}</span></p>
+    <p><strong>Obtener una lista de juegos:</strong> <span>GET - {host}/v0/{tableId}/Game</span></p>
+    <p><strong>Obtener una transacción:</strong> <span>GET - {host}/v0/{tableId}/Transaction/{id}</span></p>
+    <p><strong>Obtener una lista de transacciones:</strong> <span>GET - {host}/v0/{tableId}/Transaction</span></p>
+    <p><strong>Obtener una partida:</strong> <span>GET - {host}/v0/{tableId}/Match/{id}</span></p>
+    <p><strong>Obtener una lista de partidas:</strong> <span>GET - {host}/v0/{tableId}/Match</span></p>
+    <p><strong>Obtener un registro:</strong> <span>GET - {host}/v0/{tableId}/Registration/{id}</span></p>
+    <p><strong>Obtener una lista de registros:</strong> <span>GET - {host}/v0/{tableId}/Registration</span></p>
+    <p><strong>Obtener un premio:</strong> <span>GET - {host}/v0/{tableId}/Reward/{id}</span></p>
+    <p><strong>Obtener una lista de premios:</strong> <span>GET - {host}/v0/{tableId}/Reward</span></p>
   </section>
 
   <section id="tecnologias">
     <h2>Tecnologías Utilizadas</h2>
-    <p>A continuación se listarán las tecnologías que se utilizaron para el desarrollo de la primera versión de la aplicación. Conforme se desarrollen las siguientes iteraciones, se estará actualizando el listado de tecnologías</p>
+    <p>A continuación se listarán las tecnologías que se utilizaron para el desarrollo de la primera versión de la
+      aplicación. Conforme se desarrollen las siguientes iteraciones, se estará actualizando el listado de tecnologías
+    </p>
+    <h3>API Gateway</h3>
+    <p>El desarrollo del API Gateway se realizó utilizando el lenguaje de programación Java, junto con Spring Framework
+      y, por último, para poder hacer el enrutado de forma correcta, se utilizó la dependencia de <strong>Spring Cloud
+        Gateway</strong>.
+    </p>
+    <p>La configuración de rutas se puede hacer de manera simple, usando Java, y con infinidad de condiciones de
+      enrutado, tal como se muestra a continuación.
+    </p>
+    <div class="image-container">
+      <img src="img/config de routes en API Gateway.jpg" alt="configuración de rutas en API Gateway">
+    </div>
+    <h3>Descubrimiento de microservicios</h3>
+    <p>Una parte importante en el manejo de microservicios es el autodescubrimiento de los mismos. Esto se hace posible
+      a través de un servidor de descubrimiento de servicios. En este caso, se utilizó el que nos proporciona
+      <strong>Netflix</strong>,
+      llamado <strong>Eureka</strong>. Particularmente utilicé aquél que provee el paquete starter de Spring:
+      <span>spring-cloud-starter-netflix-eureka</span>
+    </p>
+    <p>Con este servidor de descubrimiento de servicios, desde mi API gateway puedo enrutar las peticiones a los
+      diferentes microservicios haciendo uso de los nombres de servicio y no su DNS o IP, lo cual facilita en gran
+      medida el mantenimiento. Además, con esto puedo hacer uso del <strong>Balanceador de Carga</strong> propio de
+      Spring Cloud Gateway
+    </p>
+    <p>Así se ve el panel de control de <strong>Eureka Server</strong> con los servicios registrados</p>
+    <div class="image-container">
+      <img src="img/panel de control eureka server.jpg" alt="Panel de control de Eureka Server">
+    </div>
     <h3>Orquestador</h3>
-    <p>El desarrollo de este orquestador se realizó con el arquetipo de Clean Architecture de Bancolombia, llamado <a target="_blank" href="https://bancolombia.github.io/scaffold-clean-architecture/docs/intro/">Scaffold Bancolombia</a>. Esto implica el uso del lenguaje de programación Java en su versión 21, junto con el framework más famoso para el desarrollo de aplicaciones en Java, el cual es <a target="_blank" href="https://spring.io/">Spring Framework</a>, junto con tecnologías como lo son Spring Webflux para el manejo de flujos reactivos y para exponer endpoints, así como consumir APIs externas funcionando como un Web Client</p>
+    <p>El desarrollo de este orquestador se realizó con el arquetipo de Clean Architecture de Bancolombia, llamado <a
+        target="_blank" href="https://bancolombia.github.io/scaffold-clean-architecture/docs/intro/">Scaffold
+        Bancolombia</a>. Esto implica el uso del lenguaje de programación Java en su versión 21, junto con el framework
+      más famoso para el desarrollo de aplicaciones en Java, el cual es <a target="_blank"
+        href="https://spring.io/">Spring Framework</a>. Además, con tecnologías como lo son Spring Webflux para el
+      manejo
+      de flujos reactivos y para exponer endpoints y consumir APIs externas funcionando como un Web Client</p>
+    <p>La ventaja de <strong>Scaffold Bancolombia</strong> es que me permite estructurar de manera limpia el proyecto,
+      segregandolo por capas, siguiendo las recomendaciones de la <strong>Arquitectura Limpia</strong></p>
+    <div class="image-container">
+      <img src="img/estructura clean arch Scaffold Bancolombia.jpg"
+        alt="estructura de arquitectura limpia Scaffold Bancolombia">
+    </div>
     <h3>Simulación de back-end</h3>
-    <p>Para la simulación del back-end de la aplicación, opté por el uso de una gran herramienta con una muy favorable capa gratuita, la cual es <a href="https://www.airtable.com/">Airtable</a>. Con esta herramienta online puedo almacenar data como si se tratase de una base de datos. Puedo simular microservicios para cada entidad, y también tengo a disposición una API con la cual puedo consultar, modificar y eliminar data a placer a través de pticiones HTTP. Para el consumo seguro, esta aplicación ofrece el uso de tokens Bearer con diferentes alcances.</p>
+    <p>Para la simulación del back-end de la aplicación, opté por el uso de una gran herramienta con una muy favorable
+      capa gratuita, la cual es <a href="https://www.airtable.com/">Airtable</a>. Con esta herramienta online puedo
+      almacenar data como si se tratase de una base de datos. Puedo simular microservicios para cada entidad, y también
+      tengo a disposición una API con la cual puedo consultar, modificar y eliminar data a placer a través de pticiones
+      HTTP. Para el consumo seguro, esta aplicación ofrece el uso de tokens Bearer con diferentes alcances.</p>
+    <p>Así se ve el panel de gestión de <strong>Airtable</strong> con todas las tablas</p>
+    <div class="image-container">
+      <img src="img/tablas - panel de control airtable.jpg" alt="Tablas - panel de control airtable">
+    </div>
+    <p>Y este es un ejemplo de cómo se ve la tabla <strong>Usuarios</strong></p>
+    <div class="image-container">
+      <img src="img/tabla de usuarios en airtable.jpg" alt="Tabla de usuarios en airtable">
+    </div>
   </section>
 
   <section id="instalacion">
     <h2>Instrucciones de Instalación</h2>
-    <p>Para el uso de la aplicación, basta con clonar el repositorio del orquestador y ejecutarlo en cualquier IDE, o desde consola usando comandos gradle. El link del repositorio se lista a continuación: <a target="_blank" href="https://github.com/assessment-pragma-fabian-camilo/AP202503_VideogamesTournamentManagement_Orchestator">AP202503_VideogamesTournamentManagement_Orchestator</a></p>
-    
-    
+    <p><span><a href="collections/APTV.postman_collection.json" download="Postman Collection APTV">Descargar - Colección Postman con todas las peticiones</a></span></p>
+    <p>Para el uso de la aplicación, basta con clonar los repositorios:</p>
+    <ul>
+      <li>
+        Orchestrator - <a target="_blank"
+          href="https://github.com/assessment-pragma-fabian-camilo/AP202503_VideogamesTournamentManagement_Orchestator">AP202503_VideogamesTournamentManagement_Orchestator</a>
+      </li>
+      <li>
+        API Gateway - <a target="_blank"
+          href="https://github.com/assessment-pragma-fabian-camilo/AP202503_VideogamesTournamentManagement_APIGateway">AP202503_VideogamesTournamentManagement_APIGateway</a>
+      </li>
+      <li>
+        Discovery - <a target="_blank"
+          href="https://github.com/assessment-pragma-fabian-camilo/AP202503_VideogamesTournamentManagement_Discovery">AP202503_VideogamesTournamentManagement_Discovery</a>
+      </li>
+    </ul>
+    <p>y ejecutarlos en cualquier IDE, o desde consola usando comandos gradle.</p>
+    <p>Para la ejecución en local, el host del Servidor Eureka y el API Gateway son:</p>
+    <ul>
+      <li>
+        Eureka Server - <span>https://localhost:8761</span>. Es accesible desde un navegador web para poder ver el panel
+        de control de la siguiente manera
+        <div class="image-container">
+          <img src="img/panel de control eureka server.jpg" alt="Panel de control de Eureka Server">
+        </div>
+      </li>
+      <li>
+        API Gateway - <span>https://localhost:8080</span>
+      </li>
+    </ul>
+    <p>Todos los demás recursos se acceden desde el API Gateway</p>
+
+
   </section>
 
   <section id="gestion-proyecto">
@@ -995,7 +1086,8 @@
     <div class="sub-seccion">
       <h4>JIRA</h4>
       <p>En mi caso, lo primero que hice fue buscar una buena herramienta para la gestión de proyectos, y finalmente di
-        con una que en el mercado es de las mejores: <a target="_blank" href="https://www.atlassian.com/es/software/jira">Jira</a></p>
+        con una que en el mercado es de las mejores: <a target="_blank"
+          href="https://www.atlassian.com/es/software/jira">Jira</a></p>
       <p>En esta herramienta creé un proyecto, y dentro de este <strong>proyecto</strong>, creé una
         <strong>épica</strong>. Esta épica tiene el alcance de tener una MVP del sistema, con algunos casos de uso
         implementados. Hay que tener en cueta que esto es un proyecto evolutivo y, por tanto, en siguientes iteraciones
@@ -1005,10 +1097,12 @@
         <strong>historias de usuario</strong> y las <strong>tareas</strong>
       </p>
       <div class="image-container">
-        <img src="img/panel de control jira.jpg" alt="Panel de control de Jira en el proyecto assessment-pragma-fabian-camilo">
+        <img src="img/panel de control jira.jpg"
+          alt="Panel de control de Jira en el proyecto assessment-pragma-fabian-camilo">
       </div>
       <h4>GitHub</h4>
-      <p>La plataforma para gestión de repositorios por excelencia... <a target="_blank" href="https://github.com/">GitHub</a></p>
+      <p>La plataforma para gestión de repositorios por excelencia... <a target="_blank"
+          href="https://github.com/">GitHub</a></p>
       <p>Quise tener más control al momento de gestionar mis repositorios para el desarrollo de esta plataforma, por lo
         que lo primero que hice fue generar una organización centrada exclusivamente al assessment en Pragma, y ya
         dentro de esta organización tengo los repositorios necesarios para esta entrega y posibles futuras entregas de
@@ -1017,7 +1111,8 @@
         <strong>assessment-pragma-fabian-camilo</strong>
       </p>
       <div class="image-container">
-        <img src="img/repositorios github.jpg" alt="Repositorios de GitHub en la organización assessment-pragma-fabian-camilo">
+        <img src="img/repositorios github.jpg"
+          alt="Repositorios de GitHub en la organización assessment-pragma-fabian-camilo">
       </div>
       <h4>Integración entre Jira y GitHub</h4>
       <p>Una de las cosas más importantes es que el tablero de Jira lo puedo alimentar con los commits y pull requests
