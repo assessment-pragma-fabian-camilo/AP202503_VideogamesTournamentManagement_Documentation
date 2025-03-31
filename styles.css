@@ -9,8 +9,22 @@ body {
 header {
     background: #6429cd;
     color: #fff;
-    padding: 20px;
+    padding: 5px;
     text-align: center;
+    width: 100%;
+}
+
+nav {
+    position: sticky;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: #6429cd;
+    color: #fff;
+    padding: 1px;
+    text-align: center;
+    width: 100%;
+    box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.3);
 }
 
 a {
@@ -143,7 +157,11 @@ span {
     padding: 3px 6px;
     border-radius: 4px;
     color: #fff;
-    font-size: 14px;
+    font-size: 16px;
+}
+
+span a:hover{
+    color: #fff;
 }
 
 .scroll-to-top {
