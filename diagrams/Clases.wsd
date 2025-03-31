@@ -1,0 +1,128 @@
+@startuml Clases
+
+class Donation {
+    - id: String
+    - createdTime: String
+    - userId: String
+    - tournamentId: String
+    - transactionId: String
+    - amount: BigDecimal
+}
+
+class Game {
+    - id: String
+    - createdTime: String
+    - name: String
+    - description: String
+    - categories: Set<String>
+    - consoles: Set<Console>
+    - releaseDate: String
+    - classification: Classification
+}
+
+class Match {
+    - id: String
+    - createdTime: String
+    - participantIds: Set<String>
+    - winnerId: String
+    - tournamentId: String
+    - timeStart: String
+    - dateStart: String
+    - timeEnd: String
+    - status: Status
+}
+
+class Registration {
+    - id: String
+    - createdTime: String
+    - tournamentId: String
+    - participantId: String
+    - status: Status
+}
+
+class Reward {
+    - id: String
+    - createdTime: String
+    - standings: Map<Byte, String>
+    - prizePerStanding: Map<String, BigDecimal>
+    - tournamentId: String
+}
+
+class Ticket {
+    - id: String
+    - createdTime: String
+    - customerId: String
+    - tournamentId: String
+    - transactionId: String
+    - type: Type
+    - status: Status
+    - qr: String
+}
+
+class Tournament {
+    - id: String
+    - createdTime: String
+    - name: String
+    - ruleset: String
+    - promoterId: String
+    - gameId: String
+    - prizePerPosition: Map<Byte, BigDecimal>
+    - isPaid: Boolean
+    - status: Status
+    - placeLimit: Short
+    - placeRemaining: Short
+    - placeMinimum: Short
+    - dateStart: String
+    - dateEnd: String
+    - transmissions: List<Transmission>
+    - commission: Commission
+    - preRegisteredParticipantIds: Set<String>
+    - participantIds: Set<String>
+    - disqualifiedParticipantIds: Set<String>
+    - moderatorIds: Set<String>
+    - price: Price
+    - closedTournamentJustification: String
+}
+
+class Transaction {
+    - id: String
+    - createdTime: String
+    - customerId: String
+    - tournamentId: String
+    - status: Status
+    - paymentMethod: PaymentMethod
+    - reference: String
+    - type: Type
+}
+
+class User {
+    - id: String
+    - createdTime: String
+    - alias: String
+    - name: String
+    - email: String
+    - phone: String
+    - birthDate: String
+    - status: Status
+    - password: String
+    - roles: Set<Role>
+}
+
+Donation  "1" -- "1" Transaction
+Donation  "N" -- "1" Tournament
+Donation  "N" -- "1" User
+Match  "N" -- "1" Tournament
+Match  "N" -- "N" User
+Registration  "N" -- "1" Tournament
+Registration  "N" -- "1" User
+Reward  "1" -- "1" Tournament
+Reward  "N" -- "N" User
+Ticket  "N" -- "1" Tournament
+Ticket  "N" -- "1" User
+Ticket  "1" -- "1" Transaction
+Tournament  "N" -- "1" Game
+Tournament  "N" -- "N" User
+Transaction  "N" -- "1" User
+Transaction  "N" -- "1" Tournament
+
+@enduml

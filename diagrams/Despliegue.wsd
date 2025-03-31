@@ -1,0 +1,77 @@
+@startuml Despliegue
+
+node "AWS Cloud" {
+    node "Route 53" as DNS
+    node "AWS WAF & Shield" as Firewall
+    node "CloudFront CDN" as CDN
+    node "VPC" as VPC {
+        node "Load Balancer" as LB
+        node "API Gateway" as APIGateway
+        node "Cluster Kubernetes" as K8S {
+            node "Orquestador" as OrchestatorService
+            node "Donaciones" as DonationService
+            node "Juegos" as GameService
+            node "Partidas" as MatchService
+            node "Registros" as RegisterService
+            node "Premios" as RewardService
+            node "Tickets" as TicketService
+            node "Transacciones" as TranssactionService
+            node "Usuarios" as UserService
+            node "Torneos" as TournamentService
+            node "Pagos" as PaymentService
+            node "Notificaciones" as NotificationService
+        }
+    }
+    
+    database "Base de Datos NoSQL" as NoSQLDatabase
+    cloud "Streaming" as StreamingServices
+    cloud "Pasarelas de pago" as PaymentServices
+    node "IAM" as IAM
+    queue "SNS" as SNS
+    queue "SES" as SES
+    
+    node "Monitoreo & Trazabilidad" as Monitoring {
+        node "CloudWatch" as CloudWatch
+        node "X-Ray" as XRay
+    }
+    
+}
+
+DonationService --> NoSQLDatabase
+GameService --> NoSQLDatabase
+MatchService --> NoSQLDatabase
+RegisterService --> NoSQLDatabase
+RewardService --> NoSQLDatabase
+TicketService --> NoSQLDatabase
+TranssactionService --> NoSQLDatabase
+UserService --> NoSQLDatabase
+TournamentService --> NoSQLDatabase
+
+OrchestatorService --> DonationService
+OrchestatorService --> GameService
+OrchestatorService --> MatchService
+OrchestatorService --> RegisterService
+OrchestatorService --> RewardService
+OrchestatorService --> TicketService
+OrchestatorService --> TranssactionService
+OrchestatorService --> UserService
+OrchestatorService --> TournamentService
+OrchestatorService --> PaymentService
+OrchestatorService --> NotificationService
+
+NotificationService --> SNS
+NotificationService --> SES
+
+TournamentService --> StreamingServices : "Twitch, YouTube, Discord"
+PaymentService --> PaymentServices : "Stripe, PayPal"
+
+LB --> APIGateway
+APIGateway --> OrchestatorService
+
+DNS --> CDN
+CDN --> Firewall
+Firewall --> LB
+
+Monitoring --> K8S
+
+@enduml

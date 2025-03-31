@@ -1,0 +1,114 @@
+@startuml Casos de uso
+
+actor Administrator
+actor Promoter
+actor Moderator
+actor Participant
+actor Viewer
+
+rectangle "Tournament Management" {
+    usecase "Register Tournament" as UT1
+    usecase "Start Tournament" as UT2
+    usecase "Cancel Tournament" as UT3
+    usecase "Finish Tournament" as UT4
+    usecase "Reschedule Tournament" as UT5
+    usecase "Add Moderator to Tournament" as UT6
+    usecase "Remove Moderator from Tournament" as UT7
+}
+
+rectangle "Participant Management" {
+    usecase "Pre-register Participant" as UP1
+    usecase "Register Pre-registered Participant" as UP2
+    usecase "Disqualify Participant" as UP3
+}
+
+rectangle "Match Management" {
+    usecase "Register Match" as UM1
+    usecase "Cancel Match" as UM2
+    usecase "Reschedule Match" as UM3
+    usecase "Start Match" as UM4
+    usecase "Finish Match" as UM5
+}
+
+rectangle "Spectator Management" {
+    usecase "Pre-register Viewer" as UV1
+    usecase "Register Pre-registered Viewer" as UV2
+}
+
+rectangle "Ticket Management" {
+    usecase "Register Ticket" as UTK1
+    usecase "Block Ticket" as UTK2
+    usecase "Use Ticket" as UTK3
+}
+
+rectangle "Donations" {
+    usecase "Register Donation" as UD1
+}
+
+rectangle "User Management" {
+    usecase "Register New User" as UU1
+    usecase "Ban User" as UU2
+}
+
+Administrator --|> Promoter
+Administrator --|> Moderator
+Promoter --|> Moderator
+
+Promoter --> UT1
+Promoter --> UT2
+Promoter --> UT3
+Promoter --> UT4
+Promoter --> UT5
+Promoter --> UT6
+Promoter --> UT7
+Promoter --> UM1
+Promoter --> UM2
+Promoter --> UM3
+Promoter --> UM4
+Promoter --> UM5
+Promoter --> UD1
+
+Moderator --> UT2
+Moderator --> UT4
+Moderator --> UT5
+Moderator --> UM1
+Moderator --> UM2
+Moderator --> UM3
+Moderator --> UM4
+Moderator --> UM5
+
+Administrator --> UT1
+Administrator --> UT2
+Administrator --> UT3
+Administrator --> UT4
+Administrator --> UT5
+Administrator --> UT6
+Administrator --> UT7
+Administrator --> UP1
+Administrator --> UP2
+Administrator --> UP3
+Administrator --> UM1
+Administrator --> UM2
+Administrator --> UM3
+Administrator --> UM4
+Administrator --> UM5
+Administrator --> UV1
+Administrator --> UV2
+Administrator --> UTK1
+Administrator --> UTK2
+Administrator --> UTK3
+Administrator --> UD1
+Administrator --> UU1
+Administrator --> UU2
+
+Participant --> UP1
+Participant --> UP2
+Participant --> UTK1
+Participant --> UTK3
+
+Viewer --> UV1
+Viewer --> UV2
+Viewer --> UTK1
+Viewer --> UTK3
+
+@enduml
