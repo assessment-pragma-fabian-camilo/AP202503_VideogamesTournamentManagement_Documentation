@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Videogames Tournament Management - Documentacion</title>
+  <meta name="description" content="Documentacion funcional y tecnica del assessment de torneos de videojuegos" />
+  <link rel="stylesheet" href="styles.css" />
+  <script defer src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js"></script>
+  <script defer src="app.js"></script>
+</head>
+<body>
+  <div class="bg-shape bg-shape-a" aria-hidden="true"></div>
+  <div class="bg-shape bg-shape-b" aria-hidden="true"></div>
+
+  <header class="topbar">
+    <div class="brand">
+      <span class="brand-dot"></span>
+      <div>
+        <p class="brand-kicker">Assessment Pragma</p>
+        <h1>Videogames Tournament Management</h1>
+      </div>
+    </div>
+    <nav class="topbar-actions topbar-nav" aria-label="Navegacion principal">
+      <a href="#funcional">Funcional</a>
+      <a href="#entidades">Entidades y reglas</a>
+      <a href="#diagramas">Diagramas</a>
+      <a href="#api">Rutas y firma OAS3</a>
+      <a href="#repos">Repositorios</a>
+      <a href="#tecnologias">Tecnologias</a>
+      <a href="#seguridad">Seguridad</a>
+    </nav>
+  </header>
+
+  <aside class="search-panel" id="searchPanel" aria-hidden="true">
+    <label for="globalSearch">Buscar en la documentacion</label>
+    <input id="globalSearch" type="search" placeholder="Ej: torneos, seguridad, JWT, endpoint" />
+    <p class="search-hint">Filtra contenido por palabras clave en secciones, modelos y rutas.</p>
+  </aside>
+
+  <main>
+    <section class="hero" id="inicio">
+      <div class="hero-content reveal">
+        <p class="eyebrow">Assessment Pragma - Torneo de videojuegos</p>
+        <h2>Documento funcional y tecnico - Torneo de videojuegos</h2>
+        <p>
+          En esta pagina se consolidan reglas de negocio, definiciones técnicas, arquitectura, seguridad, contratos API, entre otros.
+        </p>
+        <div class="hero-chips" id="heroChips"></div>
+      </div>
+      <div class="quick-nav reveal" aria-label="Descarga de contrato">
+        <a id="copyOasBtn" class="btn" href="./oas3.json" download="oas3.json">Descargar OAS3</a>
+      </div>
+    </section>
+
+    <section id="funcional" class="doc-section reveal searchable" data-keywords="funcional modelos casos de uso reglas negocio torneos">
+      <div class="section-head">
+        <p class="section-kicker">Vista de producto</p>
+        <h3>Definición funcional</h3>
+      </div>
+      <p class="section-intro">
+        La plataforma organiza torneos de videojuegos donde participan promotores, jugadores, espectadores y moderadores.
+        El ciclo operativo cubre creacion de torneos, inscripcion de equipos, gestion de partidas, monetizacion y cierre con entrega de incentivos.
+      </p>
+
+      <div class="grid two" id="functionalCards"></div>
+
+      <div class="card">
+        <h4>Modelos de dominio (resumen)</h4>
+        <div id="domainModels" class="model-grid"></div>
+      </div>
+
+      <div class="card">
+        <h4>Matriz de roles y permisos</h4>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Accion</th>
+                <th>Roles permitidos</th>
+                <th>Restriccion</th>
+              </tr>
+            </thead>
+            <tbody id="rolesTable"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section id="entidades" class="doc-section reveal searchable" data-keywords="entidades reglas de negocio tablas campos relaciones supabase">
+      <div class="section-head">
+        <p class="section-kicker">Core de dominio</p>
+        <h3>Entidades y reglas detalladas</h3>
+      </div>
+      <p class="section-intro">
+        Desglose completo por tabla: campos, relaciones y reglas de negocio extraidas del documento base.
+      </p>
+      <div id="entitiesAccordion" class="entities-accordion"></div>
+    </section>
+
+    <section id="diagramas" class="doc-section reveal searchable" data-keywords="diagramas arquitectura casos de uso clases secuencia entidad relacion despliegue aws">
+      <div class="section-head">
+        <p class="section-kicker">Vista de diseno</p>
+        <h3>Diagramas clave</h3>
+      </div>
+      <p class="section-intro">
+        Diagramas generados en Mermaid para facilitar mantenimiento y versionamiento dentro del repositorio.
+      </p>
+      <div class="tabs" role="tablist" aria-label="Tipos de diagramas" id="diagramTabs"></div>
+      <div id="diagramContent" class="diagram-content"></div>
+    </section>
+
+    <section id="api" class="doc-section reveal searchable" data-keywords="api oas3 openapi rutas endpoints contratos">
+      <div class="section-head">
+        <p class="section-kicker">Vista de integracion</p>
+        <h3>Rutas y firma OAS3</h3>
+      </div>
+      <p class="section-intro">
+        Contrato de referencia para el microservicio orquestador y su exposicion a traves de API Gateway.
+      </p>
+      <div class="card">
+        <div class="toolbar">
+          <label for="routeFilter">Filtrar por metodo:</label>
+          <select id="routeFilter">
+            <option value="ALL">Todos</option>
+            <option value="GET">GET</option>
+            <option value="POST">POST</option>
+            <option value="PATCH">PATCH</option>
+            <option value="DELETE">DELETE</option>
+          </select>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Metodo</th>
+                <th>Ruta</th>
+                <th>Descripcion</th>
+                <th>Roles</th>
+              </tr>
+            </thead>
+            <tbody id="routesTable"></tbody>
+          </table>
+        </div>
+      </div>
+      <div class="card">
+        <h4>Firma OpenAPI 3 (JSON)</h4>
+        <pre id="oasPreview" class="code-block"></pre>
+      </div>
+    </section>
+
+    <section id="repos" class="doc-section reveal searchable" data-keywords="repositorios github orchestrator discovery gateway">
+      <div class="section-head">
+        <p class="section-kicker">Vista de codigo</p>
+        <h3>Repositorios de la solucion</h3>
+      </div>
+      <div class="grid three" id="reposGrid"></div>
+    </section>
+
+    <section id="tecnologias" class="doc-section reveal searchable" data-keywords="tecnologias java reactor clean architecture supabase spring gateway eureka">
+      <div class="section-head">
+        <p class="section-kicker">Stack</p>
+        <h3>Tecnologias utilizadas</h3>
+      </div>
+      <div id="techGrid" class="grid three"></div>
+    </section>
+
+    <section id="seguridad" class="doc-section reveal searchable" data-keywords="seguridad jwt rls spring security auth supabase permisos roles">
+      <div class="section-head">
+        <p class="section-kicker">Gobierno y control</p>
+        <h3>Seguridad</h3>
+      </div>
+      <div id="securityList" class="grid three"></div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>Assessment Pragma</p>
+  </footer>
+</body>
+</html>
